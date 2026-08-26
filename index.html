@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emax Television - Trujillo | En Vivo</title>
+    <title>EMAX TELEVISION - TRUJILLO PERU | En Vivo</title>
     <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
@@ -255,29 +255,11 @@
             margin-bottom: 1rem;
         }
 
-        .news-header h3 a {
+        .news-header h3 {
             color: var(--accent-yellow);
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-decoration: none;
-            transition: opacity 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .news-header h3 a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-
-        .news-header h3 a span {
-            font-size: 0.8rem;
-            background: rgba(0, 180, 216, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--accent-cyan);
         }
 
         .news-list {
@@ -289,18 +271,21 @@
         }
 
         .news-item {
+            display: block;
+            text-decoration: none;
             background: rgba(4, 8, 20, 0.7);
             padding: 12px;
             border-radius: 8px;
             border-left: 3px solid var(--accent-cyan);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .news-item:hover {
             transform: translateX(4px);
             background: rgba(4, 8, 20, 0.95);
             border-left-color: var(--accent-yellow);
-            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
         }
 
         .news-item .news-date {
@@ -347,16 +332,16 @@
     <!-- Cabecera -->
     <header>
         <div class="brand-container">
-            <img src="logo.jpg" alt="EMax Television Logo" class="channel-logo">
+            <img src="logo.jpg" alt="EMAX TELEVISION Logo" class="channel-logo">
             <div class="logo-container">
-                <h1>EMax <span>Television</span></h1>
-                <span class="location-tag">Trujillo - Perú</span>
+                <h1>EMAX <span>TELEVISION</span></h1>
+                <span class="location-tag">TRUJILLO - PERÚ</span>
             </div>
         </div>
         <div class="header-stats">
             <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
             <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
-            <div class="live-badge">● En Vivo</div>
+            <div class="live-badge">● EN VIVO</div>
         </div>
     </header>
 
@@ -369,23 +354,18 @@
             </div>
 
             <div class="channel-info">
-                <h2>Señal Abierta HD - Trujillo</h2>
+                <h2>SEÑAL ABIERTA HD - TRUJILLO</h2>
                 <p>Transmitiendo en directo desde Trujillo para toda la región. Disfruta de nuestra programación especial las 24 horas.</p>
             </div>
         </div>
 
-        <!-- Columna Derecha: Cuadro de Noticias con Enlace Dinámico -->
+        <!-- Columna Derecha: Cuadro de Noticias Interactivo -->
         <aside class="news-section">
             <div class="news-header">
-                <h3>
-                    <!-- Enlace que redirige a las noticias actuales de Trujillo -->
-                    <a href="https://news.google.com/search?q=Trujillo%20Peru&hl=es-419&gl=PE&ceid=PE%3Aes-419" target="_blank">
-                        Miramax al Día <span>Ver más ↗</span>
-                    </a>
-                </h3>
+                <h3>NOTICIAS AL DÍA</h3>
             </div>
 
-            <!-- Contenedor donde se cargan las noticias dinámicas -->
+            <!-- Contenedor de Noticias -->
             <div class="news-list" id="newsContainer">
                 <div class="news-item">
                     <span class="news-date">Cargando...</span>
@@ -398,7 +378,7 @@
 
     <!-- Pie de página -->
     <footer>
-        <p>&copy; 2026 <span>EMax Television</span> - Trujillo. Todos los derechos reservados.</p>
+        <p>&copy; 2026 <span>EMAX TELEVISION</span> - TRUJILLO. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Funcionalidad -->
@@ -467,22 +447,25 @@
         }
         updateVisitorCounter();
 
-        // 5. Sistema de Noticias Automáticas
+        // 5. Sistema de Noticias con enlaces directos a Google News (Trujillo)
         const noticiasCanal = [
             {
-                fecha: "Hace 15 minutos",
+                fecha: "Hace pocos minutos",
                 titulo: "Despliegue informativo en Trujillo",
-                contenido: "Nuestros equipos periodísticos se encuentran recorriendo los puntos clave de la ciudad."
+                contenido: "Nuestros equipos periodísticos se encuentran recorriendo los puntos clave de la ciudad.",
+                enlace: "https://news.google.com/search?q=Trujillo%20Peru%20noticias&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
             {
-                fecha: "Hace 1 hora",
-                titulo: "Nuevos programas culturales",
-                contenido: "Emax Television anuncia la incorporación de espacios dedicados al arte y la historia local."
+                fecha: "Actualidad",
+                titulo: "Nuevos programas culturales y locales",
+                contenido: "Emax Television anuncia la incorporación de espacios dedicados al arte y la historia regional.",
+                enlace: "https://news.google.com/search?q=Trujillo%20actualidad&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
             {
-                fecha: "Hace 3 horas",
-                titulo: "Resumen deportivo regional",
-                contenido: "Conoce los detalles de los encuentros futbolísticos y competencias destacadas de la semana."
+                fecha: "Deportes",
+                titulo: "Resumen deportivo y regional",
+                contenido: "Conoce los detalles de los encuentros futbolísticos y competencias destacadas de la semana.",
+                enlace: "https://news.google.com/search?q=Trujillo%20deportes%20futbol&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             }
         ];
 
@@ -491,11 +474,13 @@
             contenedor.innerHTML = "";
 
             noticiasCanal.forEach(noticia => {
-                const item = document.createElement('div');
+                const item = document.createElement('a');
+                item.href = noticia.enlace;
+                item.target = "_blank";
                 item.classList.add('news-item');
                 item.innerHTML = `
                     <span class="news-date">${noticia.fecha}</span>
-                    <h4>${noticia.titulo}</h4>
+                    <h4>${noticia.titulo} ↗</h4>
                     <p>${noticia.contenido}</p>
                 `;
                 contenedor.appendChild(item);
@@ -503,7 +488,6 @@
         }
 
         cargarNoticiasAutomaticas();
-        setInterval(cargarNoticiasAutomaticas, 300000);
     </script>
 </body>
 </html>
