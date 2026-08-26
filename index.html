@@ -92,17 +92,48 @@
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* Cabecera */
+        /* Cabecera con Banner Superior de Trujillo */
         header {
-            background: rgba(6, 16, 38, 0.9);
+            background: rgba(6, 16, 38, 0.92);
             backdrop-filter: blur(16px);
-            padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
             border-bottom: 2px solid rgba(0, 180, 216, 0.5);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
             z-index: 10;
+        }
+
+        .trujillo-banner-top {
+            width: 100%;
+            height: 90px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .trujillo-banner-top img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            filter: brightness(0.9);
+        }
+
+        .trujillo-banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(3, 13, 34, 0.2), rgba(3, 13, 34, 0.6));
+        }
+
+        .header-main-content {
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .brand-container {
@@ -120,16 +151,6 @@
             box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
         }
 
-        .city-image-header {
-            height: 40px;
-            width: auto;
-            max-width: 120px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--accent-yellow);
-            box-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
-        }
-
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -145,13 +166,6 @@
 
         .logo-container h1 span {
             color: var(--accent-yellow);
-        }
-
-        .location-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 2px;
         }
 
         .logo-container .location-tag {
@@ -235,11 +249,6 @@
             gap: 1.5rem;
         }
 
-        .player-container-box {
-            position: relative;
-            width: 100%;
-        }
-
         .player-wrapper {
             width: 100%;
             background: #000;
@@ -255,40 +264,6 @@
             height: 100%;
             object-fit: contain;
             outline: none;
-        }
-
-        .quality-selector-wrapper {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 5;
-            background: rgba(6, 16, 38, 0.9);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 6px;
-            padding: 4px 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-
-        .quality-selector-wrapper label {
-            font-size: 0.75rem;
-            color: var(--accent-yellow);
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        #qualitySelect {
-            background: #030d22;
-            color: var(--text-light);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 4px;
-            padding: 3px 6px;
-            font-size: 0.8rem;
-            outline: none;
-            cursor: pointer;
         }
 
         .channel-info {
@@ -464,22 +439,26 @@
     <div class="dynamic-waves"></div>
     <div id="sparkles-container"></div>
 
-    <!-- Cabecera -->
+    <!-- Cabecera con Banner Superior de Trujillo -->
     <header>
-        <div class="brand-container">
-            <img src="logo.jpg" alt="EMAX TELEVISION Logo" class="channel-logo">
-            <div class="logo-container">
-                <h1>EMAX <span>TELEVISION</span></h1>
-                <div class="location-box">
-                    <img src="trujillo.jpg" alt="Trujillo - Perú" class="city-image-header" onerror="this.style.display='none';">
+        <div class="trujillo-banner-top">
+            <div class="trujillo-banner-overlay"></div>
+            <img src="trujillo.jpg" alt="Trujillo - Perú" onerror="this.style.display='none';">
+        </div>
+
+        <div class="header-main-content">
+            <div class="brand-container">
+                <img src="logo.jpg" alt="EMAX TELEVISION Logo" class="channel-logo">
+                <div class="logo-container">
+                    <h1>EMAX <span>TELEVISION</span></h1>
                     <span class="location-tag">TRUJILLO - PERÚ</span>
                 </div>
             </div>
-        </div>
-        <div class="header-stats">
-            <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
-            <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
-            <div class="live-badge">● EN VIVO</div>
+            <div class="header-stats">
+                <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
+                <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
+                <div class="live-badge">● EN VIVO</div>
+            </div>
         </div>
     </header>
 
@@ -487,17 +466,8 @@
     <main>
         <!-- Columna Izquierda -->
         <div class="left-column">
-            <div class="player-container-box">
-                <div class="quality-selector-wrapper">
-                    <label for="qualitySelect">Calidad:</label>
-                    <select id="qualitySelect">
-                        <option value="-1">Auto (HD)</option>
-                    </select>
-                </div>
-
-                <div class="player-wrapper">
-                    <video id="videoPlayer" controls autoplay muted playsinline></video>
-                </div>
+            <div class="player-wrapper">
+                <video id="videoPlayer" controls autoplay muted playsinline></video>
             </div>
 
             <div class="channel-info">
@@ -572,37 +542,19 @@
 
         var video = document.getElementById('videoPlayer');
         var videoSrc = 'https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8';
-        var qualitySelect = document.getElementById('qualitySelect');
 
         if (Hls.isSupported()) {
             var hls = new Hls();
             hls.loadSource(videoSrc);
             hls.attachMedia(video);
-
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
                 video.play().catch(error => console.log("Autoplay bloqueado:", error));
-                
-                qualitySelect.innerHTML = '<option value="-1">Auto (HD)</option>';
-
-                hls.levels.forEach((level, index) => {
-                    let resolutionName = level.height ? `${level.height}p` : `Calidad ${index + 1}`;
-                    let option = document.createElement('option');
-                    option.value = index;
-                    option.text = resolutionName;
-                    qualitySelect.appendChild(option);
-                });
             });
-
-            qualitySelect.addEventListener('change', function(event) {
-                hls.currentLevel = parseInt(event.target.value);
-            });
-
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = videoSrc;
             video.addEventListener('loadedmetadata', function() {
                 video.play().catch(error => console.log("Autoplay bloqueado:", error));
             });
-            document.querySelector('.quality-selector-wrapper').style.display = 'none';
         }
 
         function updateClock() {
