@@ -40,7 +40,7 @@
             overflow-x: hidden;
         }
 
-        /* Fondo Animado Profesional en Azul y Amarillo (Visible y Llamativo) */
+        /* Fondo Animado Profesional en Azul y Amarillo */
         .pro-tv-background {
             position: fixed;
             top: 0;
@@ -58,7 +58,6 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* Ondas de luz brillantes y dinámicas en tonos azul y amarillo */
         .dynamic-waves {
             position: fixed;
             top: -50%;
@@ -76,7 +75,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Destellos Amarillos y Celestes de Alta Intensidad */
         .sparkle {
             position: absolute;
             background: radial-gradient(circle, var(--accent-yellow) 0%, rgba(0, 180, 216, 0) 70%);
@@ -122,7 +120,6 @@
             box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
         }
 
-        /* Imagen de la ciudad de Trujillo en la parte superior */
         .city-image-header {
             height: 40px;
             width: auto;
@@ -213,7 +210,7 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Contenido Principal en Grid (Adaptable a celulares) */
+        /* Contenido Principal en Grid */
         main {
             flex: 1;
             max-width: 1300px;
@@ -238,7 +235,6 @@
             gap: 1.5rem;
         }
 
-        /* Contenedor del reproductor y selector de calidad flotante */
         .player-container-box {
             position: relative;
             width: 100%;
@@ -261,7 +257,6 @@
             outline: none;
         }
 
-        /* Selector de Calidad superpuesto */
         .quality-selector-wrapper {
             position: absolute;
             top: 12px;
@@ -312,18 +307,12 @@
         }
 
         .channel-info h2 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--accent-cyan);
-            margin-bottom: 0.3rem;
             text-shadow: 0 2px 8px rgba(0, 180, 216, 0.4);
+            letter-spacing: 0.5px;
         }
 
-        .channel-info p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        /* Botón de Integración con Facebook */
         .btn-facebook {
             background-color: #1877f2;
             color: white;
@@ -345,7 +334,6 @@
             box-shadow: 0 6px 20px rgba(24, 119, 242, 0.7);
         }
 
-        /* Contenedores de Anuncios Verticales */
         .ads-vertical-container {
             width: 100%;
             background: var(--card-bg);
@@ -379,7 +367,6 @@
             border: 1px solid rgba(0, 180, 216, 0.2);
         }
 
-        /* Sección de Noticias */
         .news-section {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -454,7 +441,6 @@
             color: var(--text-gray);
         }
 
-        /* Pie de página */
         footer {
             background-color: rgba(2, 6, 23, 0.95);
             backdrop-filter: blur(12px);
@@ -485,7 +471,6 @@
             <div class="logo-container">
                 <h1>EMAX <span>TELEVISION</span></h1>
                 <div class="location-box">
-                    <!-- Imagen de la ciudad de Trujillo (trujillo.jpg) -->
                     <img src="trujillo.jpg" alt="Trujillo - Perú" class="city-image-header" onerror="this.style.display='none';">
                     <span class="location-tag">TRUJILLO - PERÚ</span>
                 </div>
@@ -500,10 +485,9 @@
 
     <!-- Contenido Principal -->
     <main>
-        <!-- Columna Izquierda: Reproductor HLS vMix con selector de calidad e Información -->
+        <!-- Columna Izquierda -->
         <div class="left-column">
             <div class="player-container-box">
-                <!-- Selector de Calidad Flotante sobre el Video -->
                 <div class="quality-selector-wrapper">
                     <label for="qualitySelect">Calidad:</label>
                     <select id="qualitySelect">
@@ -519,22 +503,19 @@
             <div class="channel-info">
                 <div>
                     <h2>SEÑAL EN VIVO DESDE TRUJILLO PARA EL MUNDO</h2>
-                    <p>Transmitiendo en directo vía vMix HLS para toda la región y el mundo entero.</p>
                 </div>
-                <!-- Botón de Red Social Facebook -->
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" class="btn-facebook">
                     Síguenos en Facebook
                 </a>
             </div>
         </div>
 
-        <!-- Columna Derecha: Portada de Noticias + Anuncios Verticales -->
+        <!-- Columna Derecha -->
         <aside class="news-section">
             <div class="news-header">
                 <h3>NOTICIAS AL DÍA</h3>
             </div>
 
-            <!-- Sistema de Noticias Automáticas -->
             <div class="news-list" id="newsContainer">
                 <div class="news-item">
                     <span class="news-date">Cargando...</span>
@@ -543,7 +524,6 @@
                 </div>
             </div>
 
-            <!-- Anuncio Vertical 1 (Imagen formato JPG: anuncio.jpg) -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
@@ -551,7 +531,6 @@
                 </a>
             </div>
 
-            <!-- Anuncio Vertical en Video (formato MP4: anuncio.mp4) -->
             <div class="ads-vertical-container">
                 <h4>Spot Publicitario</h4>
                 <video class="ads-vertical-media" autoplay muted loop playsinline>
@@ -560,7 +539,6 @@
                 </video>
             </div>
 
-            <!-- Anuncio Vertical 2 (Imagen formato JPG: anuncio1.jpg) -->
             <div class="ads-vertical-container">
                 <h4>Espacio Comercial</h4>
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
@@ -577,7 +555,6 @@
 
     <!-- Scripts de Funcionalidad -->
     <script>
-        // 1. Generador de destellos flotantes corporativos en el fondo
         const sparklesContainer = document.getElementById('sparkles-container');
         for (let i = 0; i < 35; i++) {
             const sparkle = document.createElement('div');
@@ -593,7 +570,6 @@
             sparklesContainer.appendChild(sparkle);
         }
 
-        // 2. Reproductor HLS (.m3u8) desde vMix / OpenCaster con Selector de Calidad Dinámico
         var video = document.getElementById('videoPlayer');
         var videoSrc = 'https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8';
         var qualitySelect = document.getElementById('qualitySelect');
@@ -629,7 +605,6 @@
             document.querySelector('.quality-selector-wrapper').style.display = 'none';
         }
 
-        // 3. Reloj en tiempo real (Fecha y Hora)
         function updateClock() {
             const now = new Date();
             const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -643,7 +618,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 4. Contador de Visitas inteligente
         function updateVisitorCounter() {
             let visits = localStorage.getItem('emax_visits');
             if (!visits) {
@@ -659,7 +633,6 @@
         }
         updateVisitorCounter();
 
-        // 5. Sistema rápido para publicar y actualizar noticias destacadas
         const noticiasCanal = [
             {
                 fecha: "🔴 Destacado de Hoy",
