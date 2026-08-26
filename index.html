@@ -82,13 +82,28 @@
             z-index: 10;
         }
 
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .channel-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+        }
+
         .logo-container {
             display: flex;
             flex-direction: column;
         }
 
         .logo-container h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--text-light);
             letter-spacing: 1px;
@@ -100,7 +115,7 @@
         }
 
         .logo-container .location-tag {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--accent-cyan);
             font-weight: 600;
             letter-spacing: 2px;
@@ -313,9 +328,12 @@
 
     <!-- Cabecera -->
     <header>
-        <div class="logo-container">
-            <h1>EMax <span>Television</span></h1>
-            <span class="location-tag">Trujillo - Perú</span>
+        <div class="brand-container">
+            <img src="logo.jpg" alt="EMax Television Logo" class="channel-logo">
+            <div class="logo-container">
+                <h1>EMax <span>Television</span></h1>
+                <span class="location-tag">Trujillo - Perú</span>
+            </div>
         </div>
         <div class="header-stats">
             <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
@@ -338,32 +356,18 @@
             </div>
         </div>
 
-        <!-- Columna Derecha: Cuadro de Noticias -->
+        <!-- Columna Derecha: Cuadro de Noticias Dinámico -->
         <aside class="news-section">
             <div class="news-header">
                 <h3>Noticias al Día</h3>
             </div>
 
-            <div class="news-list">
-                <!-- Noticia 1 -->
+            <!-- Contenedor donde se cargarán automáticamente las noticias -->
+            <div class="news-list" id="newsContainer">
                 <div class="news-item">
-                    <span class="news-date">Hoy</span>
-                    <h4>Cobertura especial en Trujillo</h4>
-                    <p>Sigue los acontecimientos más destacados e informativos de la jornada local.</p>
-                </div>
-
-                <!-- Noticia 2 -->
-                <div class="news-item">
-                    <span class="news-date">Actualidad</span>
-                    <h4>Actualización comunitaria y cultural</h4>
-                    <p>Nuevos espacios y programas enfocados en el desarrollo de nuestra comunidad.</p>
-                </div>
-
-                <!-- Noticia 3 -->
-                <div class="news-item">
-                    <span class="news-date">Deportes</span>
-                    <h4>Resumen deportivo regional</h4>
-                    <p>Entérate de los resultados de los equipos locales y disciplinas destacadas de la semana.</p>
+                    <span class="news-date">Cargando...</span>
+                    <h4>Actualizando boletín informativo</h4>
+                    <p>Obteniendo las últimas novedades de Trujillo...</p>
                 </div>
             </div>
         </aside>
@@ -439,6 +443,46 @@
             document.getElementById('count').innerText = visits;
         }
         updateVisitorCounter();
+
+        // 5. Sistema de Noticias Automáticas (Carga dinámica)
+        // Puedes cambiar las noticias aquí mismo o en un archivo JSON externo cuando gustes
+        const noticiasCanal = [
+            {
+                fecha: "Hace 15 minutos",
+                titulo: "Despliegue informativo en Trujillo",
+                contenido: "Nuestros equipos periodísticos se encuentran recorriendo los puntos clave de la ciudad."
+            },
+            {
+                fecha: "Hace 1 hora",
+                titulo: "Nuevos programas culturales",
+                    contenido: "Emax Television anuncia la incorporación de espacios dedicados al arte y la historia local."
+            },
+            {
+                fecha: "Hace 3 horas",
+                titulo: "Resumen deportivo regional",
+                contenido: "Conoce los detalles de los encuentros futbolísticos y competencias destacadas de la semana."
+            }
+        ];
+
+        function cargarNoticiasAutomaticas() {
+            const contenedor = document.getElementById('newsContainer');
+            contenedor.innerHTML = ""; // Limpiar contenido previo
+
+            noticiasCanal.forEach(noticia => {
+                const item = document.createElement('div');
+                item.classList.add('news-item');
+                item.innerHTML = `
+                    <span class="news-date">${noticia.fecha}</span>
+                    <h4>${noticia.titulo}</h4>
+                    <p>${noticia.contenido}</p>
+                `;
+                contenedor.appendChild(item);
+            });
+        }
+
+        // Cargar las noticias al iniciar y programar actualización automática cada 5 minutos (300000 ms)
+        cargarNoticiasAutomaticas();
+        setInterval(cargarNoticiasAutomaticas, 300000);
     </script>
 </body>
 </html>
