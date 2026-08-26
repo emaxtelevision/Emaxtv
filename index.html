@@ -285,35 +285,19 @@
             transform: translateY(-2px);
         }
 
-        /* Sección de Anuncios y Monetización */
-        .ads-banner {
-            width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        .ads-banner img {
-            width: 100%;
-            height: auto;
-            max-height: 120px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Contenedor para Video Publicitario Vertical (anuncio.mp4) */
+        /* Contenedores de Anuncios Verticales (Imágenes y Videos) */
         .ads-vertical-container {
             width: 100%;
             background: rgba(3, 7, 18, 0.85);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(0, 180, 216, 0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px;
+            padding: 12px;
+            margin-top: 15px;
         }
 
         .ads-vertical-container h4 {
@@ -324,12 +308,14 @@
             letter-spacing: 1px;
         }
 
-        .ads-vertical-video {
+        .ads-vertical-media {
             width: 100%;
-            max-height: 320px;
+            max-height: 400px;
             border-radius: 8px;
             object-fit: cover;
+            display: block;
             outline: none;
+            border: 1px solid rgba(0, 180, 216, 0.2);
         }
 
         /* Sección de Noticias (Portada y Destacadas) */
@@ -343,6 +329,7 @@
             flex-direction: column;
             gap: 1.5rem;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            height: fit-content;
         }
 
         .news-header {
@@ -447,7 +434,7 @@
 
     <!-- Contenido Principal -->
     <main>
-        <!-- Columna Izquierda: Reproductor HLS vMix, Información y Banner Publicitario -->
+        <!-- Columna Izquierda: Reproductor HLS vMix e Información -->
         <div class="left-column">
             <div class="player-wrapper">
                 <video id="videoPlayer" controls autoplay muted playsinline></video>
@@ -463,16 +450,9 @@
                     Síguenos en Facebook
                 </a>
             </div>
-
-            <!-- Espacio Publicitario Horizontal (anuncio.jpg) -->
-            <div class="ads-banner">
-                <a href="#" target="_blank">
-                    <img src="anuncio.jpg" alt="Espacio Publicitario Emax" onerror="this.src='https://via.placeholder.com/900x120/0b192c/00b4d8?text=EMAX+PUBLICIDAD+HD';">
-                </a>
-            </div>
         </div>
 
-        <!-- Columna Derecha: Portada de Noticias + Video Vertical de Publicidad (anuncio.mp4) + Anuncio 1 -->
+        <!-- Columna Derecha: Portada de Noticias + Anuncios Verticales (anuncio.jpg, anuncio1.jpg y anuncio.mp4) -->
         <aside class="news-section">
             <div class="news-header">
                 <h3>NOTICIAS AL DÍA</h3>
@@ -487,19 +467,28 @@
                 </div>
             </div>
 
-            <!-- Video Vertical de Publicidad (anuncio.mp4) -->
+            <!-- Anuncio Vertical 1 (Imagen formato JPG: anuncio.jpg) -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
-                <video class="ads-vertical-video" autoplay muted loop playsinline>
+                <a href="#" target="_blank" style="width: 100%;">
+                    <img src="anuncio.jpg" alt="Anuncio Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/0b192c/00b4d8?text=PUBLICIDAD+VERTICAL';">
+                </a>
+            </div>
+
+            <!-- Anuncio Vertical en Video (formato MP4: anuncio.mp4) -->
+            <div class="ads-vertical-container">
+                <h4>Spot Publicitario</h4>
+                <video class="ads-vertical-media" autoplay muted loop playsinline>
                     <source src="anuncio.mp4" type="video/mp4">
                     Tu navegador no soporta videos publicitarios.
                 </video>
             </div>
 
-            <!-- Segundo Espacio Publicitario (anuncio1.jpg) -->
-            <div class="ads-banner">
-                <a href="#" target="_blank">
-                    <img src="anuncio1.jpg" alt="Patrocinador Oficial Emax" onerror="this.src='https://via.placeholder.com/400x100/0b192c/ffd166?text=PATROCINADOR+OFICIAL';">
+            <!-- Anuncio Vertical 2 (Imagen formato JPG: anuncio1.jpg) -->
+            <div class="ads-vertical-container">
+                <h4>Espacio Comercial</h4>
+                <a href="#" target="_blank" style="width: 100%;">
+                    <img src="anuncio1.jpg" alt="Patrocinador Oficial Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/0b192c/ffd166?text=PATROCINADOR+OFICIAL';">
                 </a>
             </div>
         </aside>
