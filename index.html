@@ -221,6 +221,12 @@
             gap: 1.5rem;
         }
 
+        /* Contenedor del reproductor y selector de calidad flotante */
+        .player-container-box {
+            position: relative;
+            width: 100%;
+        }
+
         .player-wrapper {
             width: 100%;
             background: #000;
@@ -236,6 +242,41 @@
             height: 100%;
             object-fit: contain;
             outline: none;
+        }
+
+        /* Selector de Calidad superpuesto en la esquina superior derecha del reproductor */
+        .quality-selector-wrapper {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 5;
+            background: rgba(11, 25, 44, 0.85);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 6px;
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .quality-selector-wrapper label {
+            font-size: 0.75rem;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #qualitySelect {
+            background: #030712;
+            color: var(--text-light);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 4px;
+            padding: 3px 6px;
+            font-size: 0.8rem;
+            outline: none;
+            cursor: pointer;
         }
 
         .channel-info {
@@ -434,10 +475,20 @@
 
     <!-- Contenido Principal -->
     <main>
-        <!-- Columna Izquierda: Reproductor HLS vMix e Información -->
+        <!-- Columna Izquierda: Reproductor HLS con selector de calidad y opciones -->
         <div class="left-column">
-            <div class="player-wrapper">
-                <video id="videoPlayer" controls autoplay muted playsinline></video>
+            <div class="player-container-box">
+                <!-- Selector de Calidad Flotante sobre el Video -->
+                <div class="quality-selector-wrapper">
+                    <label for="qualitySelect">Calidad:</label>
+                    <select id="qualitySelect">
+                        <option value="-1">Auto (HD)</option>
+                    </select>
+                </div>
+
+                <div class="player-wrapper">
+                    <video id="videoPlayer" controls autoplay muted playsinline></video>
+                </div>
             </div>
 
             <div class="channel-info">
@@ -517,22 +568,45 @@
             sparklesContainer.appendChild(sparkle);
         }
 
-        // 2. Reproductor HLS (.m3u8) desde vMix / OpenCaster
+        // 2. Reproductor HLS (.m3u8) desde vMix / OpenCaster con Selector de Calidad Dinámico
         var video = document.getElementById('videoPlayer');
         var videoSrc = 'https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8';
+        var qualitySelect = document.getElementById('qualitySelect');
 
         if (Hls.isSupported()) {
             var hls = new Hls();
             hls.loadSource(videoSrc);
             hls.attachMedia(video);
+
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
                 video.play().catch(error => console.log("Autoplay bloqueado:", error));
+                
+                // Limpiar selector previo
+                qualitySelect.innerHTML = '<option value="-1">Automático (HD)</option>';
+
+                // Poblar las opciones de calidad detectadas (ej. 240p, 480p, 720p, 1080p)
+                hls.levels.forEach((level, index) => {
+                    let resolutionName = level.height ? `${level.height}p` : `Calidad ${index + 1}`;
+                    let option = document.createElement('option');
+                    option.value = index;
+                    option.text = resolutionName;
+                    qualitySelect.appendChild(option);
+                });
             });
+
+            // Cambiar de calidad al seleccionar en el menú desplegable
+            qualitySelect.addEventListener('change', function(event) {
+                hls.currentLevel = parseInt(event.target.value);
+            });
+
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            // Soporte nativo (Safari en iOS/Mac)
             video.src = videoSrc;
             video.addEventListener('loadedmetadata', function() {
                 video.play().catch(error => console.log("Autoplay bloqueado:", error));
             });
+            // Ocultar selector si el navegador usa HLS nativo
+            document.querySelector('.quality-selector-wrapper').style.display = 'none';
         }
 
         // 3. Reloj en tiempo real (Fecha y Hora)
