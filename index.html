@@ -101,7 +101,7 @@
             100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
 
-        /* Cabecera con Banner Superior */
+        /* Cabecera con Banner Superior e Insignia Grande */
         header {
             background: rgba(17, 24, 39, 0.92);
             backdrop-filter: blur(16px);
@@ -114,19 +114,25 @@
 
         .trujillo-banner-top {
             width: 100%;
-            height: 90px;
+            height: 110px;
             overflow: hidden;
             position: relative;
             border-bottom: 2px solid var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .trujillo-banner-top img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
             display: block;
-            filter: brightness(0.9);
+            filter: brightness(0.45); /* Oscurecido para que resalte el texto grande */
         }
 
         .trujillo-banner-overlay {
@@ -135,7 +141,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(31, 19, 1, 0.2), rgba(31, 19, 1, 0.6));
+            background: radial-gradient(circle, rgba(31, 19, 1, 0.4) 0%, rgba(11, 19, 39, 0.8) 100%);
+        }
+
+        /* Estilo del texto grande y llamativo en la parte superior */
+        .banner-company-title {
+            position: relative;
+            z-index: 2;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(255, 183, 3, 0.9), 0 0 30px rgba(0, 180, 216, 0.7), 0 2px 5px rgba(0, 0, 0, 0.9);
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .banner-company-title {
+                font-size: 1.4rem;
+                letter-spacing: 1.5px;
+            }
+            .trujillo-banner-top {
+                height: 90px;
+            }
         }
 
         .header-main-content {
@@ -479,11 +509,12 @@
     <div class="dynamic-waves"></div>
     <div id="sparkles-container"></div>
 
-    <!-- Cabecera con Banner Superior -->
+    <!-- Cabecera con Banner Superior e Insignia Grande de la Razón Social -->
     <header>
         <div class="trujillo-banner-top">
             <div class="trujillo-banner-overlay"></div>
             <img src="trujillo.jpg" alt="Enet Fiber Peru" onerror="this.style.display='none';">
+            <h2 class="banner-company-title">ENTORNO DIGITAL ONLINE S.A.C.</h2>
         </div>
 
         <div class="header-main-content">
