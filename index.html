@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMax Television - En Vivo y Noticias</title>
-    <!-- Librería Hls.js para el reproductor M3U8 -->
+    <title>EMax Television - Trujillo | En Vivo</title>
+    <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         :root {
@@ -13,7 +13,7 @@
             --accent-yellow: #ffd166;
             --text-light: #ffffff;
             --text-gray: #a0aec0;
-            --card-bg: rgba(13, 27, 62, 0.75);
+            --card-bg: rgba(13, 27, 62, 0.8);
         }
 
         * {
@@ -34,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* Fondo Animado con Partículas y Gradientes */
+        /* Fondo Animado con Gradientes */
         .animated-background {
             position: fixed;
             top: 0;
@@ -53,7 +53,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Destellos flotantes */
+        /* Destellos Flotantes */
         .sparkle {
             position: absolute;
             background: radial-gradient(circle, var(--accent-yellow) 0%, rgba(0, 180, 216, 0) 70%);
@@ -64,23 +64,15 @@
         }
 
         @keyframes floatSparkle {
-            0% {
-                transform: translateY(105vh) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         /* Cabecera */
         header {
-            background: rgba(13, 27, 62, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(13, 27, 62, 0.9);
+            backdrop-filter: blur(12px);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -88,6 +80,11 @@
             border-bottom: 3px solid var(--accent-cyan);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
             z-index: 10;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
         }
 
         .logo-container h1 {
@@ -102,10 +99,39 @@
             color: var(--accent-yellow);
         }
 
+        .logo-container .location-tag {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
         .header-stats {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .top-clock {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid var(--accent-cyan);
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .visitor-counter {
+            background: rgba(0, 180, 216, 0.15);
+            border: 1px solid var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
         }
 
         .live-badge {
@@ -121,24 +147,13 @@
             animation: pulse 1.5s infinite;
         }
 
-        .visitor-counter {
-            background: rgba(0, 180, 216, 0.15);
-            border: 1px solid var(--accent-cyan);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
-            font-weight: 600;
-            backdrop-filter: blur(5px);
-        }
-
         @keyframes pulse {
             0% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.7; transform: scale(1.05); }
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Contenido Principal en Grid */
+        /* Contenido Principal */
         main {
             flex: 1;
             max-width: 1300px;
@@ -184,9 +199,8 @@
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-left: 4px solid var(--accent-yellow);
-            border-top: 1px solid rgba(0, 180, 216, 0.2);
-            border-right: 1px solid rgba(0, 180, 216, 0.2);
-            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-left-width: 4px;
             padding: 1.2rem 1.5rem;
             border-radius: 0 8px 8px 0;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
@@ -203,7 +217,7 @@
             font-size: 0.9rem;
         }
 
-        /* Columna de Noticias */
+        /* Sección de Noticias */
         .news-section {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -231,13 +245,6 @@
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-
-        .current-time {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            text-align: right;
-            line-height: 1.2;
         }
 
         .news-list {
@@ -308,9 +315,11 @@
     <header>
         <div class="logo-container">
             <h1>EMax <span>Television</span></h1>
+            <span class="location-tag">Trujillo - Perú</span>
         </div>
         <div class="header-stats">
-            <div class="visitor-counter">Visitas: <span id="count">1042</span></div>
+            <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
+            <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
             <div class="live-badge">● En Vivo</div>
         </div>
     </header>
@@ -324,38 +333,37 @@
             </div>
 
             <div class="channel-info">
-                <h2>Señal Abierta HD</h2>
-                <p>Transmitiendo en directo para toda la comunidad. Sintoniza nuestros espacios informativos y de entretenimiento.</p>
+                <h2>Señal Abierta HD - Trujillo</h2>
+                <p>Transmitiendo en directo desde Trujillo para toda la región. Disfruta de nuestra programación especial las 24 horas.</p>
             </div>
         </div>
 
-        <!-- Columna Derecha: Cuadro de Noticias y Reloj -->
+        <!-- Columna Derecha: Cuadro de Noticias -->
         <aside class="news-section">
             <div class="news-header">
                 <h3>Noticias al Día</h3>
-                <div class="current-time" id="liveClock">Cargando hora...</div>
             </div>
 
             <div class="news-list">
                 <!-- Noticia 1 -->
                 <div class="news-item">
-                    <span class="news-date">Hoy, 02:00 PM</span>
-                    <h4>Gran cobertura especial</h4>
-                    <p>Sigue los detalles de los acontecimientos más importantes ocurridos durante la jornada.</p>
+                    <span class="news-date">Hoy</span>
+                    <h4>Cobertura especial en Trujillo</h4>
+                    <p>Sigue los acontecimientos más destacados e informativos de la jornada local.</p>
                 </div>
 
                 <!-- Noticia 2 -->
                 <div class="news-item">
-                    <span class="news-date">Hoy, 10:30 AM</span>
-                    <h4>Innovación y tecnología</h4>
-                    <p>Nuevos proyectos de desarrollo local entran en marcha este mes con apoyo comunitario.</p>
+                    <span class="news-date">Actualidad</span>
+                    <h4>Actualización comunitaria y cultural</h4>
+                    <p>Nuevos espacios y programas enfocados en el desarrollo de nuestra comunidad.</p>
                 </div>
 
                 <!-- Noticia 3 -->
                 <div class="news-item">
-                    <span class="news-date">Ayer</span>
-                    <h4>Resumen deportivo semanal</h4>
-                    <p>Entérate de los resultados y jugadas más destacadas del fin de semana en nuestra sección deportiva.</p>
+                    <span class="news-date">Deportes</span>
+                    <h4>Resumen deportivo regional</h4>
+                    <p>Entérate de los resultados de los equipos locales y disciplinas destacadas de la semana.</p>
                 </div>
             </div>
         </aside>
@@ -363,31 +371,24 @@
 
     <!-- Pie de página -->
     <footer>
-        <p>&copy; 2026 <span>EMax Television</span>. Todos los derechos reservados.</p>
+        <p>&copy; 2026 <span>EMax Television</span> - Trujillo. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Scripts (Reproductor HLS, Reloj, Contador y Destellos) -->
+    <!-- Scripts de Funcionalidad -->
     <script>
-        // 1. Generador automático de destellos flotantes en el fondo
+        // 1. Generador de destellos flotantes en el fondo
         const sparklesContainer = document.getElementById('sparkles-container');
-        const numberOfSparkles = 25;
-
-        for (let i = 0; i < numberOfSparkles; i++) {
+        for (let i = 0; i < 25; i++) {
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
-            
-            // Posición y tamaños aleatorios
-            const size = Math.random() * 6 + 2; // entre 2px y 8px
+            const size = Math.random() * 6 + 2;
             sparkle.style.width = `${size}px`;
             sparkle.style.height = `${size}px`;
             sparkle.style.left = `${Math.random() * 100}vw`;
-            
-            // Duración y retraso aleatorios para un efecto natural
-            const duration = Math.random() * 6 + 4; // entre 4s y 10s
+            const duration = Math.random() * 6 + 4;
             const delay = Math.random() * 5;
             sparkle.style.animationDuration = `${duration}s`;
             sparkle.style.animationDelay = `${delay}s`;
-
             sparklesContainer.appendChild(sparkle);
         }
 
@@ -418,7 +419,7 @@
             const dateStr = now.toLocaleDateString('es-ES', optionsDate);
             const timeStr = now.toLocaleTimeString('es-ES', optionsTime);
             
-            document.getElementById('liveClock').innerHTML = `${dateStr}<br><b>${timeStr}</b>`;
+            document.getElementById('topClock').innerHTML = `${dateStr} | <b>${timeStr}</b>`;
         }
         setInterval(updateClock, 1000);
         updateClock();
