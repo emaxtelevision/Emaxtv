@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO para aparecer en Google -->
-    <title>EMAX TELEVISION - TRUJILLO PERÚ | Señal en Vivo HD</title>
-    <meta name="description" content="Sitio oficial de EMAX Television Trujillo Perú. Disfruta de nuestra señal en vivo en alta definición desde Trujillo para el mundo, noticias al día y programación regional.">
-    <meta name="keywords" content="EMax Television, Trujillo, Peru, En Vivo, Noticias, TV en Linea, Canal de Television">
-    <meta name="author" content="EMax Television">
+    <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
+    <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emax Tv y canales en vivo en alta definición de Trujillo, Lima, Arequipa y Piura.">
+    <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emax Tv, Trujillo, Lima, Arequipa, Piura, En Vivo, Televisión Peruana">
+    <meta name="author" content="Entorno Digital Online S.A.C.">
     
     <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -143,6 +143,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .brand-container {
@@ -166,10 +168,10 @@
         }
 
         .logo-container h1 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--text-light);
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             text-shadow: 0 2px 12px rgba(255, 183, 3, 0.6);
         }
 
@@ -178,52 +180,79 @@
         }
 
         .logo-container .location-tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--accent-yellow);
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
+        /* Selector de Canales / Ciudades */
+        .channel-selector-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(31, 19, 1, 0.8);
+            border: 1px solid var(--accent-yellow);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .channel-selector-bar label {
+            font-size: 0.8rem;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #channelSelect {
+            background: #111827;
+            color: var(--text-light);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+
         .header-stats {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .top-clock {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-light);
             background: rgba(255, 183, 3, 0.1);
             border: 1px solid rgba(255, 183, 3, 0.4);
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 20px;
             text-align: center;
-            backdrop-filter: blur(5px);
         }
 
         .visitor-counter {
             background: rgba(0, 180, 216, 0.15);
             border: 1px solid rgba(0, 180, 216, 0.4);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
             color: var(--accent-cyan);
             font-weight: 600;
-            backdrop-filter: blur(5px);
         }
 
         .live-badge {
             background-color: #ff3b30;
             color: white;
-            padding: 6px 14px;
-            font-size: 0.85rem;
+            padding: 5px 12px;
+            font-size: 0.8rem;
             font-weight: bold;
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(255, 59, 48, 0.8);
+            box-shadow: 0 0 15px rgba(255, 59, 48, 0.8);
             animation: pulse 1.5s infinite;
         }
 
@@ -291,7 +320,7 @@
         }
 
         .channel-info h2 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--accent-yellow);
             text-shadow: 0 2px 8px rgba(255, 183, 3, 0.4);
             letter-spacing: 0.5px;
@@ -457,12 +486,24 @@
 
         <div class="header-main-content">
             <div class="brand-container">
-                <img src="logo.jpg" alt="EMAX TELEVISION Logo" class="channel-logo">
+                <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo">
                 <div class="logo-container">
-                    <h1>EMAX <span>TELEVISION</span></h1>
-                    <span class="location-tag">TRUJILLO - PERÚ</span>
+                    <h1>ENET FIBER <span>PERÚ</span></h1>
+                    <span class="location-tag" id="currentLocationTag">TRUJILLO - PERÚ</span>
                 </div>
             </div>
+
+            <!-- Selector de Canales / Ciudades -->
+            <div class="channel-selector-bar">
+                <label for="channelSelect">📺 Canal:</label>
+                <select id="channelSelect" onchange="cambiarCanal(this.value)">
+                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="TRUJILLO - PERÚ" data-nombre="EMAX TV - TRUJILLO">Emax Tv - Trujillo</option>
+                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="LIMA - PERÚ" data-nombre="EMAX TV - LIMA">Emax Tv - Lima</option>
+                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="AREQUIPA - PERÚ" data-nombre="EMAX TV - AREQUIPA">Emax Tv - Arequipa</option>
+                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="PIURA - PERÚ" data-nombre="EMAX TV - PIURA">Emax Tv - Piura</option>
+                </select>
+            </div>
+
             <div class="header-stats">
                 <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
                 <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
@@ -481,7 +522,7 @@
 
             <div class="channel-info">
                 <div>
-                    <h2>SEÑAL EN VIVO DESDE TRUJILLO PARA EL MUNDO</h2>
+                    <h2 id="channelTitleDisplay">SEÑAL EN VIVO - EMAX TV TRUJILLO PARA EL MUNDO</h2>
                 </div>
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" class="btn-facebook">
                     Síguenos en Facebook
@@ -499,7 +540,7 @@
                 <div class="news-item">
                     <span class="news-date">Cargando...</span>
                     <h4>Actualizando boletín informativo</h4>
-                    <p>Obteniendo las últimas novedades de Trujillo...</p>
+                    <p>Obteniendo las últimas novedades...</p>
                 </div>
             </div>
 
@@ -527,18 +568,16 @@
         </aside>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Pie de página con Razón Social Oficial -->
     <footer>
-        <p>&copy; 2026 <span>EMAX TELEVISION</span> - TRUJILLO. Todos los derechos reservados.</p>
+        <p>&copy; 2026 <span>ENTORNO DIGITAL ONLINE S.A.C.</span> (ENET FIBER PERU). Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Funcionalidad -->
     <script>
-        // Generador de destellos flotantes en Azul y Blanco sobre fondo amarillo
         const sparklesContainer = document.getElementById('sparkles-container');
         for (let i = 0; i < 40; i++) {
             const sparkle = document.createElement('div');
-            // Alternar aleatoriamente entre destellos azules y blancos
             sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
             
             const size = Math.random() * 7 + 3;
@@ -553,25 +592,42 @@
             sparklesContainer.appendChild(sparkle);
         }
 
-        // Reproductor HLS (.m3u8)
         var video = document.getElementById('videoPlayer');
-        var videoSrc = 'https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8';
+        var hls;
 
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(videoSrc);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                video.play().catch(error => console.log("Autoplay bloqueado:", error));
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
-            video.addEventListener('loadedmetadata', function() {
-                video.play().catch(error => console.log("Autoplay bloqueado:", error));
-            });
+        function cargarStream(url) {
+            if (Hls.isSupported()) {
+                if (hls) {
+                    hls.destroy();
+                }
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play().catch(error => console.log("Autoplay bloqueado:", error));
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play().catch(error => console.log("Autoplay bloqueado:", error));
+                });
+            }
         }
 
-        // Reloj en tiempo real
+        cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
+
+        function cambiarCanal(urlStream) {
+            var selectElement = document.getElementById('channelSelect');
+            var selectedOption = selectElement.options[selectElement.selectedIndex];
+            var nombreCiudad = selectedOption.getAttribute('data-ciudad');
+            var nombreCanal = selectedOption.getAttribute('data-nombre');
+
+            document.getElementById('currentLocationTag').innerText = nombreCiudad;
+            document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${nombreCanal} PARA EL MUNDO`;
+
+            cargarStream(urlStream);
+        }
+
         function updateClock() {
             const now = new Date();
             const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -585,17 +641,15 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Contador de Visitas automático que corre al ingresar
         function updateVisitorCounter() {
-            let visits = localStorage.getItem('emax_visits');
+            let visits = localStorage.getItem('enet_visits');
             if (!visits) {
-                visits = 1250; // Valor inicial base
+                visits = 1250;
             }
             
-            // Suma una visita automáticamente cada vez que alguien entra a la web en una sesión nueva
             if (!sessionStorage.getItem('counted_visit')) {
                 visits = parseInt(visits) + 1;
-                localStorage.setItem('emax_visits', visits);
+                localStorage.setItem('enet_visits', visits);
                 sessionStorage.setItem('counted_visit', 'true');
             }
             
@@ -603,25 +657,24 @@
         }
         updateVisitorCounter();
 
-        // Sistema de Noticias Automáticas
         const noticiasCanal = [
             {
                 fecha: "🔴 Destacado de Hoy",
-                titulo: "Gran cobertura informativa en Trujillo",
-                contenido: "Nuestros equipos periodísticos recorren los puntos clave de la ciudad en vivo.",
-                enlace: "https://news.google.com/search?q=Trujillo%20Peru%20noticias&hl=es-419&gl=PE&ceid=PE%3Aes-419"
+                titulo: "Gran cobertura informativa nacional y regional",
+                contenido: "Nuestros equipos periodísticos recorren los puntos clave de cada ciudad en vivo.",
+                enlace: "https://news.google.com/search?q=Peru%20noticias&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
             {
-                fecha: "Actualidad Regional",
-                titulo: "Nuevos programas culturales en Emax TV",
+                fecha: "Actualidad",
+                titulo: "Nuevos programas culturales en Emax Tv",
                 contenido: "Anunciamos la incorporación de espacios dedicados al arte, historia y talento local.",
-                enlace: "https://news.google.com/search?q=Trujillo%20actualidad&hl=es-419&gl=PE&ceid=PE%3Aes-419"
+                enlace: "https://news.google.com/search?q=actualidad%20cultural%20Peru&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
             {
                 fecha: "Deportes",
                 titulo: "Resumen deportivo del fin de semana",
-                contenido: "Entérate de los resultados de los equipos locales y disciplinas de la región.",
-                enlace: "https://news.google.com/search?q=Trujillo%20deportes%20futbol&hl=es-419&gl=PE&ceid=PE%3Aes-419"
+                contenido: "Entérate de los resultados de los equipos y disciplinas de todas las regiones.",
+                enlace: "https://news.google.com/search?q=deportes%20Peru%20futbol&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             }
         ];
 
