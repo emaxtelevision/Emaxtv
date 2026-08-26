@@ -14,12 +14,13 @@
     
     <style>
         :root {
-            --primary-blue: #030d22;
+            --primary-bg: #111827;
+            --accent-yellow: #ffb703;
             --accent-cyan: #00b4d8;
-            --accent-yellow: #ffd166;
+            --accent-blue: #1d4ed8;
             --text-light: #ffffff;
-            --text-gray: #a0aec0;
-            --card-bg: rgba(6, 16, 38, 0.88);
+            --text-gray: #cbd5e1;
+            --card-bg: rgba(17, 24, 39, 0.9);
         }
 
         * {
@@ -30,7 +31,7 @@
         }
 
         body {
-            background-color: var(--primary-blue);
+            background-color: var(--primary-bg);
             color: var(--text-light);
             min-height: 100vh;
             display: flex;
@@ -40,7 +41,7 @@
             overflow-x: hidden;
         }
 
-        /* Fondo Animado Profesional en Azul y Amarillo */
+        /* Fondo Animado Profesional en Color Amarillo con Ondas */
         .pro-tv-background {
             position: fixed;
             top: 0;
@@ -48,7 +49,7 @@
             width: 100%;
             height: 100%;
             z-index: -3;
-            background: linear-gradient(135deg, #020617 0%, #0a192f 40%, #1b2a6f 80%, #030d22 100%);
+            background: linear-gradient(135deg, #1f1301 0%, #3d2c04 40%, #785202 80%, #1f1301 100%);
             background-size: 300% 300%;
             animation: gradientMove 12s ease infinite alternate;
         }
@@ -65,7 +66,7 @@
             width: 200%;
             height: 200%;
             z-index: -2;
-            background: radial-gradient(circle, rgba(0, 180, 216, 0.2) 0%, rgba(27, 42, 111, 0.4) 40%, rgba(255, 209, 102, 0.1) 70%, transparent 100%);
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, rgba(120, 82, 2, 0.4) 40%, rgba(0, 180, 216, 0.15) 70%, transparent 100%);
             animation: rotateWaves 20s linear infinite;
             pointer-events: none;
         }
@@ -75,30 +76,38 @@
             100% { transform: rotate(360deg); }
         }
 
-        .sparkle {
+        /* Destellos Dinámicos en Azul y Blanco */
+        .sparkle-blue, .sparkle-white {
             position: absolute;
-            background: radial-gradient(circle, var(--accent-yellow) 0%, rgba(0, 180, 216, 0) 70%);
             border-radius: 50%;
-            opacity: 0.9;
-            animation: floatSparkle 5s infinite linear;
+            animation: floatSparkle 4s infinite linear;
             z-index: -1;
-            box-shadow: 0 0 10px var(--accent-yellow);
+        }
+
+        .sparkle-blue {
+            background: radial-gradient(circle, #00b4d8 0%, rgba(0, 180, 216, 0) 70%);
+            box-shadow: 0 0 12px #00b4d8;
+        }
+
+        .sparkle-white {
+            background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0) 70%);
+            box-shadow: 0 0 10px #ffffff;
         }
 
         @keyframes floatSparkle {
-            0% { transform: translateY(105vh) scale(0.3); opacity: 0; }
+            0% { transform: translateY(105vh) scale(0.2); opacity: 0; }
             40% { opacity: 1; }
-            80% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
 
         /* Cabecera con Banner Superior de Trujillo */
         header {
-            background: rgba(6, 16, 38, 0.92);
+            background: rgba(17, 24, 39, 0.92);
             backdrop-filter: blur(16px);
             display: flex;
             flex-direction: column;
-            border-bottom: 2px solid rgba(0, 180, 216, 0.5);
+            border-bottom: 2px solid rgba(255, 183, 3, 0.5);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
             z-index: 10;
         }
@@ -108,7 +117,7 @@
             height: 90px;
             overflow: hidden;
             position: relative;
-            border-bottom: 2px solid var(--accent-cyan);
+            border-bottom: 2px solid var(--accent-yellow);
         }
 
         .trujillo-banner-top img {
@@ -126,7 +135,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(3, 13, 34, 0.2), rgba(3, 13, 34, 0.6));
+            background: linear-gradient(to bottom, rgba(31, 19, 1, 0.2), rgba(31, 19, 1, 0.6));
         }
 
         .header-main-content {
@@ -147,8 +156,8 @@
             height: 50px;
             object-fit: cover;
             border-radius: 10px;
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
+            border: 2px solid var(--accent-yellow);
+            box-shadow: 0 0 15px rgba(255, 183, 3, 0.7);
         }
 
         .logo-container {
@@ -161,7 +170,7 @@
             font-weight: bold;
             color: var(--text-light);
             letter-spacing: 1.5px;
-            text-shadow: 0 2px 12px rgba(0, 180, 216, 0.6);
+            text-shadow: 0 2px 12px rgba(255, 183, 3, 0.6);
         }
 
         .logo-container h1 span {
@@ -170,7 +179,7 @@
 
         .logo-container .location-tag {
             font-size: 0.8rem;
-            color: var(--accent-cyan);
+            color: var(--accent-yellow);
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -186,8 +195,8 @@
         .top-clock {
             font-size: 0.9rem;
             color: var(--text-light);
-            background: rgba(0, 180, 216, 0.1);
-            border: 1px solid rgba(0, 180, 216, 0.4);
+            background: rgba(255, 183, 3, 0.1);
+            border: 1px solid rgba(255, 183, 3, 0.4);
             padding: 6px 12px;
             border-radius: 20px;
             text-align: center;
@@ -195,12 +204,12 @@
         }
 
         .visitor-counter {
-            background: rgba(255, 209, 102, 0.1);
-            border: 1px solid rgba(255, 209, 102, 0.4);
+            background: rgba(0, 180, 216, 0.15);
+            border: 1px solid rgba(0, 180, 216, 0.4);
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
-            color: var(--accent-yellow);
+            color: var(--accent-cyan);
             font-weight: 600;
             backdrop-filter: blur(5px);
         }
@@ -254,8 +263,8 @@
             background: #000;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 180, 216, 0.4);
-            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 15px 35px rgba(255, 183, 3, 0.3);
+            border: 2px solid var(--accent-yellow);
             aspect-ratio: 16/9;
         }
 
@@ -270,7 +279,7 @@
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             border-left: 4px solid var(--accent-yellow);
-            border: 1px solid rgba(0, 180, 216, 0.3);
+            border: 1px solid rgba(255, 183, 3, 0.3);
             padding: 1.2rem 1.5rem;
             border-radius: 0 10px 10px 0;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -283,8 +292,8 @@
 
         .channel-info h2 {
             font-size: 1.2rem;
-            color: var(--accent-cyan);
-            text-shadow: 0 2px 8px rgba(0, 180, 216, 0.4);
+            color: var(--accent-yellow);
+            text-shadow: 0 2px 8px rgba(255, 183, 3, 0.4);
             letter-spacing: 0.5px;
         }
 
@@ -315,7 +324,7 @@
             backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(0, 180, 216, 0.4);
+            border: 1px solid rgba(255, 183, 3, 0.4);
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
@@ -339,13 +348,13 @@
             object-fit: cover;
             display: block;
             outline: none;
-            border: 1px solid rgba(0, 180, 216, 0.2);
+            border: 1px solid rgba(255, 183, 3, 0.2);
         }
 
         .news-section {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 180, 216, 0.4);
+            border: 1px solid rgba(255, 183, 3, 0.4);
             border-radius: 12px;
             padding: 1.5rem;
             display: flex;
@@ -359,7 +368,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--accent-cyan);
+            border-bottom: 2px solid var(--accent-yellow);
             padding-bottom: 0.8rem;
         }
 
@@ -368,7 +377,7 @@
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-shadow: 0 2px 8px rgba(255, 209, 102, 0.4);
+            text-shadow: 0 2px 8px rgba(255, 183, 3, 0.4);
         }
 
         .news-list {
@@ -383,19 +392,19 @@
         .news-item {
             display: block;
             text-decoration: none;
-            background: rgba(2, 6, 23, 0.8);
+            background: rgba(31, 19, 1, 0.6);
             padding: 12px;
             border-radius: 8px;
-            border-left: 3px solid var(--accent-cyan);
+            border-left: 3px solid var(--accent-yellow);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .news-item:hover {
             transform: translateX(4px);
-            background: rgba(2, 6, 23, 0.95);
-            border-left-color: var(--accent-yellow);
-            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+            background: rgba(31, 19, 1, 0.9);
+            border-left-color: var(--accent-cyan);
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
         }
 
         .news-item .news-date {
@@ -417,24 +426,24 @@
         }
 
         footer {
-            background-color: rgba(2, 6, 23, 0.95);
+            background-color: rgba(31, 19, 1, 0.95);
             backdrop-filter: blur(12px);
             text-align: center;
             padding: 1.5rem;
             font-size: 0.9rem;
             color: var(--text-gray);
-            border-top: 1px solid rgba(0, 180, 216, 0.3);
+            border-top: 1px solid rgba(255, 183, 3, 0.3);
             z-index: 10;
         }
 
         footer span {
-            color: var(--accent-cyan);
+            color: var(--accent-yellow);
         }
     </style>
 </head>
 <body>
 
-    <!-- Fondo Animado Profesional en Azul y Amarillo -->
+    <!-- Fondo Animado Profesional en Amarillo con Destellos Azul y Blanco -->
     <div class="pro-tv-background"></div>
     <div class="dynamic-waves"></div>
     <div id="sparkles-container"></div>
@@ -497,7 +506,7 @@
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
-                    <img src="anuncio.jpg" alt="Anuncio Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/030d22/00b4d8?text=PUBLICIDAD+VERTICAL';">
+                    <img src="anuncio.jpg" alt="Anuncio Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/3d2c04/ffb703?text=PUBLICIDAD+VERTICAL';">
                 </a>
             </div>
 
@@ -512,7 +521,7 @@
             <div class="ads-vertical-container">
                 <h4>Espacio Comercial</h4>
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
-                    <img src="anuncio1.jpg" alt="Patrocinador Oficial Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/030d22/ffd166?text=PATROCINADOR+OFICIAL';">
+                    <img src="anuncio1.jpg" alt="Patrocinador Oficial Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/3d2c04/ffb703?text=PATROCINADOR+OFICIAL';">
                 </a>
             </div>
         </aside>
@@ -525,21 +534,26 @@
 
     <!-- Scripts de Funcionalidad -->
     <script>
+        // Generador de destellos flotantes en Azul y Blanco sobre fondo amarillo
         const sparklesContainer = document.getElementById('sparkles-container');
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 40; i++) {
             const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            const size = Math.random() * 8 + 3;
+            // Alternar aleatoriamente entre destellos azules y blancos
+            sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
+            
+            const size = Math.random() * 7 + 3;
             sparkle.style.width = `${size}px`;
             sparkle.style.height = `${size}px`;
             sparkle.style.left = `${Math.random() * 100}vw`;
-            const duration = Math.random() * 4 + 2;
+            
+            const duration = Math.random() * 3 + 2;
             const delay = Math.random() * 5;
             sparkle.style.animationDuration = `${duration}s`;
             sparkle.style.animationDelay = `${delay}s`;
             sparklesContainer.appendChild(sparkle);
         }
 
+        // Reproductor HLS (.m3u8)
         var video = document.getElementById('videoPlayer');
         var videoSrc = 'https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8';
 
@@ -557,6 +571,7 @@
             });
         }
 
+        // Reloj en tiempo real
         function updateClock() {
             const now = new Date();
             const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -570,21 +585,25 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        // Contador de Visitas automático que corre al ingresar
         function updateVisitorCounter() {
             let visits = localStorage.getItem('emax_visits');
             if (!visits) {
-                visits = 1250;
-            } else {
-                if (!sessionStorage.getItem('visited')) {
-                    visits = parseInt(visits) + 1;
-                    localStorage.setItem('emax_visits', visits);
-                    sessionStorage.setItem('visited', 'true');
-                }
+                visits = 1250; // Valor inicial base
             }
+            
+            // Suma una visita automáticamente cada vez que alguien entra a la web en una sesión nueva
+            if (!sessionStorage.getItem('counted_visit')) {
+                visits = parseInt(visits) + 1;
+                localStorage.setItem('emax_visits', visits);
+                sessionStorage.setItem('counted_visit', 'true');
+            }
+            
             document.getElementById('count').innerText = visits;
         }
         updateVisitorCounter();
 
+        // Sistema de Noticias Automáticas
         const noticiasCanal = [
             {
                 fecha: "🔴 Destacado de Hoy",
