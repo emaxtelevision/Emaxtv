@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO para aparecer en Google -->
     <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
-    <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emax Tv y canales en vivo en alta definición de Trujillo, Lima, Arequipa y Piura.">
-    <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emax Tv, Trujillo, Lima, Arequipa, Piura, En Vivo, Televisión Peruana">
+    <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emusic, Cumbianet, Edx, Emax Tv y canales en vivo en alta definición.">
+    <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emusic, Cumbianet, Edx, Emax Tv, Selva TV, En Vivo">
     <meta name="author" content="Entorno Digital Online S.A.C.">
     
     <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
@@ -101,7 +101,7 @@
             100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
 
-        /* Cabecera con Banner Superior de Trujillo */
+        /* Cabecera con Banner Superior */
         header {
             background: rgba(17, 24, 39, 0.92);
             backdrop-filter: blur(16px);
@@ -187,7 +187,7 @@
             text-transform: uppercase;
         }
 
-        /* Selector de Canales / Ciudades */
+        /* Selector de Canales en MAYÚSCULAS */
         .channel-selector-bar {
             display: flex;
             align-items: center;
@@ -214,6 +214,8 @@
             font-size: 0.85rem;
             outline: none;
             cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .header-stats {
@@ -477,11 +479,11 @@
     <div class="dynamic-waves"></div>
     <div id="sparkles-container"></div>
 
-    <!-- Cabecera con Banner Superior de Trujillo -->
+    <!-- Cabecera con Banner Superior -->
     <header>
         <div class="trujillo-banner-top">
             <div class="trujillo-banner-overlay"></div>
-            <img src="trujillo.jpg" alt="Trujillo - Perú" onerror="this.style.display='none';">
+            <img src="trujillo.jpg" alt="Enet Fiber Peru" onerror="this.style.display='none';">
         </div>
 
         <div class="header-main-content">
@@ -489,18 +491,23 @@
                 <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo">
                 <div class="logo-container">
                     <h1>ENET FIBER <span>PERÚ</span></h1>
-                    <span class="location-tag" id="currentLocationTag">TRUJILLO - PERÚ</span>
+                    <span class="location-tag" id="currentLocationTag">SEÑAL EN VIVO</span>
                 </div>
             </div>
 
-            <!-- Selector de Canales / Ciudades -->
+            <!-- Selector de Canales en MAYÚSCULAS -->
             <div class="channel-selector-bar">
-                <label for="channelSelect">📺 Canal:</label>
+                <label for="channelSelect">📺 CANAL:</label>
                 <select id="channelSelect" onchange="cambiarCanal(this.value)">
-                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="TRUJILLO - PERÚ" data-nombre="EMAX TV - TRUJILLO">Emax Tv - Trujillo</option>
-                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="LIMA - PERÚ" data-nombre="EMAX TV - LIMA">Emax Tv - Lima</option>
-                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="AREQUIPA - PERÚ" data-nombre="EMAX TV - AREQUIPA">Emax Tv - Arequipa</option>
-                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-ciudad="PIURA - PERÚ" data-nombre="EMAX TV - PIURA">Emax Tv - Piura</option>
+                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
+                    <option value="" data-nombre="EMUSIC">EMUSIC</option>
+                    <option value="" data-nombre="CUMBIANET">CUMBIANET</option>
+                    <option value="" data-nombre="EDX">EDX</option>
+                    <option value="" data-nombre="EDX+">EDX+</option>
+                    <option value="" data-nombre="EDX3">EDX3</option>
+                    <option value="" data-nombre="EALTOMAYO">EALTOMAYO</option>
+                    <option value="" data-nombre="ENORORIENTE">ENORORIENTE</option>
+                    <option value="" data-nombre="SELVA TV">SELVA TV</option>
                 </select>
             </div>
 
@@ -522,7 +529,7 @@
 
             <div class="channel-info">
                 <div>
-                    <h2 id="channelTitleDisplay">SEÑAL EN VIVO - EMAX TV TRUJILLO PARA EL MUNDO</h2>
+                    <h2 id="channelTitleDisplay">SEÑAL EN VIVO - EMAX TV PARA EL MUNDO</h2>
                 </div>
                 <a href="https://www.facebook.com/enetfiberperu" target="_blank" class="btn-facebook">
                     Síguenos en Facebook
@@ -596,6 +603,10 @@
         var hls;
 
         function cargarStream(url) {
+            if (!url) {
+                alert("Próximamente transmisión en vivo para este canal.");
+                return;
+            }
             if (Hls.isSupported()) {
                 if (hls) {
                     hls.destroy();
@@ -614,15 +625,14 @@
             }
         }
 
+        // Canal por defecto (Emax Tv)
         cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
 
         function cambiarCanal(urlStream) {
             var selectElement = document.getElementById('channelSelect');
             var selectedOption = selectElement.options[selectElement.selectedIndex];
-            var nombreCiudad = selectedOption.getAttribute('data-ciudad');
             var nombreCanal = selectedOption.getAttribute('data-nombre');
 
-            document.getElementById('currentLocationTag').innerText = nombreCiudad;
             document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${nombreCanal} PARA EL MUNDO`;
 
             cargarStream(urlStream);
@@ -661,12 +671,12 @@
             {
                 fecha: "🔴 Destacado de Hoy",
                 titulo: "Gran cobertura informativa nacional y regional",
-                contenido: "Nuestros equipos periodísticos recorren los puntos clave de cada ciudad en vivo.",
+                contenido: "Nuestros equipos periodísticos recorren los puntos clave en vivo.",
                 enlace: "https://news.google.com/search?q=Peru%20noticias&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
             {
                 fecha: "Actualidad",
-                titulo: "Nuevos programas culturales en Emax Tv",
+                titulo: "Nuevos programas culturales",
                 contenido: "Anunciamos la incorporación de espacios dedicados al arte, historia y talento local.",
                 enlace: "https://news.google.com/search?q=actualidad%20cultural%20Peru&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
