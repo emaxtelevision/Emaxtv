@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMax Television - En Vivo y Noticias</title>
+    <!-- Librería Hls.js para el reproductor M3U8 -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        :root {
+            --primary-blue: #1b2a6f;
+            --accent-cyan: #00b4d8;
+            --accent-yellow: #ffd166;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --card-bg: rgba(13, 27, 62, 0.75);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #040814;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fondo Animado con Partículas y Gradientes */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(125deg, #040814, #0a1128, #1b2a6f, #023e8a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Destellos flotantes */
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, var(--accent-yellow) 0%, rgba(0, 180, 216, 0) 70%);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatSparkle 8s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes floatSparkle {
+            0% {
+                transform: translateY(105vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Cabecera */
+        header {
+            background: rgba(13, 27, 62, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+        }
+
+        .logo-container h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 180, 216, 0.5);
+        }
+
+        .logo-container h1 span {
+            color: var(--accent-yellow);
+        }
+
+        .header-stats {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .live-badge {
+            background-color: #ff3b30;
+            color: white;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 59, 48, 0.6);
+            animation: pulse 1.5s infinite;
+        }
+
+        .visitor-counter {
+            background: rgba(0, 180, 216, 0.15);
+            border: 1px solid var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Contenido Principal en Grid */
+        main {
+            flex: 1;
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            z-index: 1;
+        }
+
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .player-wrapper {
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.3);
+            border: 2px solid var(--accent-cyan);
+            aspect-ratio: 16/9;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            outline: none;
+        }
+
+        .channel-info {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-left: 4px solid var(--accent-yellow);
+            border-top: 1px solid rgba(0, 180, 216, 0.2);
+            border-right: 1px solid rgba(0, 180, 216, 0.2);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .channel-info h2 {
+            font-size: 1.3rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.3rem;
+        }
+
+        .channel-info p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Columna de Noticias */
+        .news-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 180, 216, 0.4);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+            max-height: 600px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-header h3 {
+            color: var(--accent-yellow);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .current-time {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .news-item {
+            background: rgba(4, 8, 20, 0.7);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateX(4px);
+            background: rgba(4, 8, 20, 0.95);
+            border-left-color: var(--accent-yellow);
+            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.2);
+        }
+
+        .news-item .news-date {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .news-item h4 {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .news-item p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: rgba(4, 8, 20, 0.9);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            border-top: 1px solid rgba(0, 180, 216, 0.2);
+            z-index: 10;
+        }
+
+        footer span {
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fondo Animado con Destellos -->
+    <div class="animated-background"></div>
+    <div id="sparkles-container"></div>
+
+    <!-- Cabecera -->
+    <header>
+        <div class="logo-container">
+            <h1>EMax <span>Television</span></h1>
+        </div>
+        <div class="header-stats">
+            <div class="visitor-counter">Visitas: <span id="count">1042</span></div>
+            <div class="live-badge">● En Vivo</div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main>
+        <!-- Columna Izquierda: Reproductor y Descripción -->
+        <div class="left-column">
+            <div class="player-wrapper">
+                <video id="videoPlayer" controls autoplay muted playsinline></video>
+            </div>
+
+            <div class="channel-info">
+                <h2>Señal Abierta HD</h2>
+                <p>Transmitiendo en directo para toda la comunidad. Sintoniza nuestros espacios informativos y de entretenimiento.</p>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Cuadro de Noticias y Reloj -->
+        <aside class="news-section">
+            <div class="news-header">
+                <h3>Noticias al Día</h3>
+                <div class="current-time" id="liveClock">Cargando hora...</div>
+            </div>
+
+            <div class="news-list">
+                <!-- Noticia 1 -->
+                <div class="news-item">
+                    <span class="news-date">Hoy, 02:00 PM</span>
+                    <h4>Gran cobertura especial</h4>
+                    <p>Sigue los detalles de los acontecimientos más importantes ocurridos durante la jornada.</p>
+                </div>
+
+                <!-- Noticia 2 -->
+                <div class="news-item">
+                    <span class="news-date">Hoy, 10:30 AM</span>
+                    <h4>Innovación y tecnología</h4>
+                    <p>Nuevos proyectos de desarrollo local entran en marcha este mes con apoyo comunitario.</p>
+                </div>
+
+                <!-- Noticia 3 -->
+                <div class="news-item">
+                    <span class="news-date">Ayer</span>
+                    <h4>Resumen deportivo semanal</h4>
+                    <p>Entérate de los resultados y jugadas más destacadas del fin de semana en nuestra sección deportiva.</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 <span>EMax Television</span>. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts (Reproductor HLS, Reloj, Contador y Destellos) -->
+    <script>
+        // 1. Generador automático de destellos flotantes en el fondo
+        const sparklesContainer = document.getElementById('sparkles-container');
+        const numberOfSparkles = 25;
+
+        for (let i = 0; i < numberOfSparkles; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            // Posición y tamaños aleatorios
+            const size = Math.random() * 6 + 2; // entre 2px y 8px
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${Math.random() * 100}vw`;
+            
+            // Duración y retraso aleatorios para un efecto natural
+            const duration = Math.random() * 6 + 4; // entre 4s y 10s
+            const delay = Math.random() * 5;
+            sparkle.style.animationDuration = `${duration}s`;
+            sparkle.style.animationDelay = `${delay}s`;
+
+            sparklesContainer.appendChild(sparkle);
+        }
+
+        // 2. Reproductor HLS (.m3u8)
+        var video = document.getElementById('videoPlayer');
+        var videoSrc = 'https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8';
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play().catch(error => console.log("Autoplay bloqueado:", error));
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.addEventListener('loadedmetadata', function() {
+                video.play().catch(error => console.log("Autoplay bloqueado:", error));
+            });
+        }
+
+        // 3. Reloj en tiempo real (Fecha y Hora)
+        function updateClock() {
+            const now = new Date();
+            const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
+            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            
+            const dateStr = now.toLocaleDateString('es-ES', optionsDate);
+            const timeStr = now.toLocaleTimeString('es-ES', optionsTime);
+            
+            document.getElementById('liveClock').innerHTML = `${dateStr}<br><b>${timeStr}</b>`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 4. Contador de Visitas inteligente
+        function updateVisitorCounter() {
+            let visits = localStorage.getItem('emax_visits');
+            if (!visits) {
+                visits = 1250;
+            } else {
+                if (!sessionStorage.getItem('visited')) {
+                    visits = parseInt(visits) + 1;
+                    localStorage.setItem('emax_visits', visits);
+                    sessionStorage.setItem('visited', 'true');
+                }
+            }
+            document.getElementById('count').innerText = visits;
+        }
+        updateVisitorCounter();
+    </script>
+</body>
+</html>
