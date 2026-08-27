@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO para aparecer en Google -->
     <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
     <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emusic, Cumbianet, Edx, Emax Tv y canales en vivo en alta definición.">
     <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emusic, Cumbianet, Edx, Emax Tv, Selva TV, En Vivo">
     <meta name="author" content="Entorno Digital Online S.A.C.">
     
-    <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
     <style>
@@ -525,7 +523,7 @@
                 <label for="channelSelect">📺 CANAL:</label>
                 <select id="channelSelect" onchange="cambiarCanal(this.value)">
                     <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
-                    <option value="https://iptvglobal.xyz:2082/emusic966/emusic9669/21800.m3u8" data-nombre="EMUSIC">EMUSIC</option>
+                    <option value="https://vs20.live.opencaster.com/emusic_6696aed5/index.m3u8" data-nombre="EMUSIC">EMUSIC</option>
                     <option value="" data-nombre="CUMBIANET">CUMBIANET</option>
                     <option value="" data-nombre="EDX">EDX</option>
                     <option value="" data-nombre="EDX+">EDX+</option>
@@ -632,35 +630,12 @@
                 hls.destroy();
             }
 
-            // Forzar uso de HLS.js con soporte nativo de respaldo
             if (Hls.isSupported()) {
-                hls = new Hls({
-                    debug: false,
-                    xhrSetup: function (xhr, url) {
-                        xhr.withCredentials = false; // Ayuda a evitar bloqueos CORS en algunos paneles IPTV
-                    }
-                });
+                hls = new Hls();
                 hls.loadSource(url);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function() {
                     video.play().catch(error => console.log("Autoplay bloqueado:", error));
-                });
-                hls.on(Hls.Events.ERROR, function(event, data) {
-                    if (data.fatal) {
-                        switch(data.type) {
-                            case Hls.ErrorTypes.NETWORK_ERROR:
-                                console.error("Error de red intentando cargar el stream:", data);
-                                hls.startLoad();
-                                break;
-                            case Hls.ErrorTypes.MEDIA_ERROR:
-                                console.error("Error de medios, intentando recuperar:", data);
-                                hls.recoverMediaError();
-                                break;
-                            default:
-                                hls.destroy();
-                                break;
-                        }
-                    }
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = url;
