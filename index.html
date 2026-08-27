@@ -132,7 +132,7 @@
             object-fit: cover;
             object-position: center;
             display: block;
-            filter: brightness(0.45); /* Oscurecido para que resalte el texto grande */
+            filter: brightness(0.45);
         }
 
         .trujillo-banner-overlay {
@@ -144,7 +144,6 @@
             background: radial-gradient(circle, rgba(31, 19, 1, 0.4) 0%, rgba(11, 19, 39, 0.8) 100%);
         }
 
-        /* Estilo del texto grande y llamativo en la parte superior */
         .banner-company-title {
             position: relative;
             z-index: 2;
@@ -526,12 +525,12 @@
                 </div>
             </div>
 
-            <!-- Selector de Canales en MAYÚSCULAS -->
+            <!-- Selector de Canales con EMUSIC configurado -->
             <div class="channel-selector-bar">
                 <label for="channelSelect">📺 CANAL:</label>
                 <select id="channelSelect" onchange="cambiarCanal(this.value)">
                     <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
-                    <option value="" data-nombre="EMUSIC">EMUSIC</option>
+                    <option value="http://iptvglobal.xyz:2082/emusic966/emusic9669/21800.m3u8" data-nombre="EMUSIC">EMUSIC</option>
                     <option value="" data-nombre="CUMBIANET">CUMBIANET</option>
                     <option value="" data-nombre="EDX">EDX</option>
                     <option value="" data-nombre="EDX+">EDX+</option>
@@ -707,8 +706,8 @@
             },
             {
                 fecha: "Actualidad",
-                titulo: "Nuevos programas culturales",
-                contenido: "Anunciamos la incorporación de espacios dedicados al arte, historia y talento local.",
+                titulo: "Nuevos programas musicales y culturales",
+                contenido: "Anunciamos la incorporación de espacios dedicados al arte, música y talento local.",
                 enlace: "https://news.google.com/search?q=actualidad%20cultural%20Peru&hl=es-419&gl=PE&ceid=PE%3Aes-419"
             },
             {
