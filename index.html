@@ -260,7 +260,7 @@
             gap: 1.2rem;
         }
 
-        /* PANTALLA 1: PORTADA INTERACTIVA */
+        /* CUADRO 1: PORTADA INTERACTIVA */
         .cover-banner-box {
             width: 100%;
             background: var(--card-bg);
@@ -311,7 +311,7 @@
             letter-spacing: 1px;
         }
 
-        /* PANTALLA 2: PATROCINADORES / PUBLICIDAD */
+        /* CUADRO 2: PATROCINADOR / PUBLICIDAD */
         .ads-vertical-container {
             width: 100%;
             background: var(--card-bg);
@@ -319,7 +319,7 @@
             -webkit-backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
-            border: 2px solid var(--accent-yellow);
+            border: 1px solid rgba(255, 183, 3, 0.4);
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
@@ -345,7 +345,100 @@
             border: 1px solid rgba(255, 183, 3, 0.2);
         }
 
-        /* PANTALLA 3: COBERTURA NACIONAL (CIUDADES SOLAS EN TRANSICIÓN) */
+        /* CUADRO 3: CANALES INFANTILES RECOMENDADOS (EN SU PROPIA PANTALLA) */
+        .kids-channels-box {
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--accent-yellow);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .kids-channels-header {
+            text-align: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 183, 3, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .kids-channels-header h4 {
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            font-weight: bold;
+        }
+
+        .kids-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            justify-items: center;
+        }
+
+        .kid-animated-card {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: rgba(31, 19, 1, 0.7);
+            border: 1px solid rgba(255, 183, 3, 0.4);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: floatCard 3s ease-in-out infinite alternate;
+        }
+
+        .kid-animated-card:nth-child(even) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px) scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+            100% { transform: translateY(-4px) scale(1.03); box-shadow: 0 8px 20px rgba(255, 183, 3, 0.3); }
+        }
+
+        .kid-animated-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(17, 24, 39, 0.95);
+            box-shadow: 0 0 18px rgba(0, 180, 216, 0.7);
+            transform: scale(1.08) translateY(-5px);
+        }
+
+        .kid-animated-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .kid-fallback-text {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            background: #111827;
+            color: var(--accent-yellow);
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px;
+        }
+
+        /* CUADRO 4: COBERTURA NACIONAL (CIUDADES EN TRANSICIÓN) */
         .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -429,7 +522,7 @@
             border: 1px solid rgba(255, 183, 3, 0.5);
         }
 
-        /* PANTALLA 4: OFICINAS AUTORIZADAS EN SECUENCIA (4s) */
+        /* CUADRO 5: OFICINAS AUTORIZADAS EN SECUENCIA (4s) */
         .offices-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -532,7 +625,6 @@
 </head>
 <body>
 
-    <!-- VIDEO DE FONDO ANIMADO ESTABILIZADO -->
     <div class="video-background-container">
         <video autoplay muted loop playsinline>
             <source src="fondoanimado.mp4" type="video/mp4">
@@ -576,7 +668,6 @@
         </div>
 
         <aside class="right-column">
-            <!-- PANTALLA 1: PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada" onerror="this.src='portada.jpg';">
@@ -586,7 +677,6 @@
                 </div>
             </a>
 
-            <!-- PANTALLA 2: PATROCINADOR / PUBLICIDAD EXCLUSIVA (SEPARADO) -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
@@ -594,164 +684,40 @@
                 </a>
             </div>
 
-            <!-- PANTALLA 3: COBERTURA NACIONAL (CIUDADES SOLAS EN TRANSICIÓN) -->
+            <div class="kids-channels-box">
+                <div class="kids-channels-header">
+                    <h4>CANALES INFANTILES RECOMENDADOS POR ENET FIBER PERU</h4>
+                </div>
+                <div class="kids-grid">
+                    <div class="kid-animated-card">
+                        <img src="bitme.jpg" alt="Bitme" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">BITME</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="Cartoonito.jpg" alt="Cartoonito" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">CARTOONITO</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="cartoonnetwor.jpg" alt="Cartoon Network" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">CARTOON NETWORK</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="clan.jpg" alt="Clan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">CLAN</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="Discovery_kids_logo.jpg" alt="Discovery Kids" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">DISCOVERY KIDS</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="dreamworks.jpg" alt="Dreamworks" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">DREAMWORKS</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
                     <div class="city-item active" data-name="Bagua">
                         <img src="bagua.jpg" class="city-slide" alt="Bagua">
-                    </div>
-                    <div class="city-item" data-name="Bellavista">
-                        <img src="bellavista.jpg" class="city-slide" alt="Bellavista">
-                    </div>
-                    <div class="city-item" data-name="Jaén">
-                        <img src="jaen.jpg" class="city-slide" alt="Jaén">
-                    </div>
-                    <div class="city-item" data-name="Juanjui">
-                        <img src="juanjui.jpg" class="city-slide" alt="Juanjui">
-                    </div>
-                    <div class="city-item" data-name="Naranjillo">
-                        <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo">
-                    </div>
-                    <div class="city-item" data-name="El Porvenir">
-                        <img src="porvenir.jpg" class="city-slide" alt="El Porvenir">
-                    </div>
-                    <div class="city-item" data-name="Rioja">
-                        <img src="rioja.jpg" class="city-slide" alt="Rioja">
-                    </div>
-                    <div class="city-item" data-name="Soritor">
-                        <img src="soritor.jpg" class="city-slide" alt="Soritor">
-                    </div>
-                    <div class="city-item" data-name="Trujillo">
-                        <img src="trujillo.jpg" class="city-slide" alt="Trujillo">
-                    </div>
-
-                    <div class="city-name-tag">
-                        <span id="cityNameDisplay">Bagua</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANTALLA 4: OFICINAS AUTORIZADAS (SEPARADO Y EN SECUENCIA DE 4 SEGUNDOS) -->
-            <div class="offices-showcase-box">
-                <div class="offices-showcase-header">
-                    <h4>Nuestras Oficinas Autorizadas</h4>
-                </div>
-                <div class="offices-slideshow-container" id="officesContainer">
-                    <div class="office-item active" data-name="Oficina Alto Mayo">
-                        <img src="oficinaaltomayo.jpg" class="office-slide" alt="Oficina Alto Mayo">
-                    </div>
-                    <div class="office-item" data-name="Oficina Bagua">
-                        <img src="oficinabagua.jpg" class="office-slide" alt="Oficina Bagua">
-                    </div>
-                    <div class="office-item" data-name="Oficina Bagua Grande">
-                        <img src="oficinabaguagrande.jpg" class="office-slide" alt="Oficina Bagua Grande">
-                    </div>
-                    <div class="office-item" data-name="Oficina Jaén">
-                        <img src="oficinajaen.jpg" class="office-slide" alt="Oficina Jaén">
-                    </div>
-                    <div class="office-item" data-name="Oficina Trujillo">
-                        <img src="oficinatrujillo.jpg" class="office-slide" alt="Oficina Trujillo">
-                    </div>
-                    <div class="office-item" data-name="Oficina Yurimaguas">
-                        <img src="oficinayurimaguas.jpg" class="office-slide" alt="Oficina Yurimaguas">
-                    </div>
-                    <div class="office-item" data-name="Oficina Zona Sur Oriente">
-                        <img src="oficinazonasuroriente.jpg" class="office-slide" alt="Oficina Zona Sur Oriente">
-                    </div>
-
-                    <div class="office-name-tag">
-                        <span id="officeNameDisplay">Oficina Alto Mayo</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 <span>ENTORNO DIGITAL ONLINE S.A.C.</span></p>
-    </footer>
-
-    <script>
-        // Generador de destellos luminosos flotantes sobre el video de fondo
-        const sparklesContainer = document.getElementById('sparkles-container');
-        for (let i = 0; i < 25; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
-            
-            const size = Math.random() * 6 + 2;
-            sparkle.style.width = `${size}px`;
-            sparkle.style.height = `${size}px`;
-            sparkle.style.left = `${Math.random() * 100}vw`;
-            
-            const duration = Math.random() * 3 + 3;
-            const delay = Math.random() * 5;
-            sparkle.style.animationDuration = `${duration}s`;
-            sparkle.style.animationDelay = `${delay}s`;
-            sparklesContainer.appendChild(sparkle);
-        }
-
-        // Transición de fotos de ciudades cada 2 segundos
-        let currentCitySlide = 0;
-        const cityItems = document.querySelectorAll('.city-item');
-        const cityNameDisplay = document.getElementById('cityNameDisplay');
-
-        function nextCitySlide() {
-            if (cityItems.length === 0) return;
-            cityItems[currentCitySlide].classList.remove('active');
-            currentCitySlide = (currentCitySlide + 1) % cityItems.length;
-            cityItems[currentCitySlide].classList.add('active');
-            
-            let cityName = cityItems[currentCitySlide].getAttribute('data-name');
-            cityNameDisplay.innerText = cityName;
-        }
-        setInterval(nextCitySlide, 2000);
-
-        // Transición de fotos de oficinas cada 4 segundos
-        let currentOfficeSlide = 0;
-        const officeItems = document.querySelectorAll('.office-item');
-        const officeNameDisplay = document.getElementById('officeNameDisplay');
-
-        function nextOfficeSlide() {
-            if (officeItems.length === 0) return;
-            officeItems[currentOfficeSlide].classList.remove('active');
-            currentOfficeSlide = (currentOfficeSlide + 1) % officeItems.length;
-            officeItems[currentOfficeSlide].classList.add('active');
-            
-            let officeName = officeItems[currentOfficeSlide].getAttribute('data-name');
-            officeNameDisplay.innerText = officeName;
-        }
-        setInterval(nextOfficeSlide, 4000);
-
-        var video = document.getElementById('videoPlayer');
-        var hls;
-        function cargarStream(url) {
-            if (hls) hls.destroy();
-            if (Hls.isSupported()) {
-                hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(e => console.log(e)));
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.addEventListener('loadedmetadata', () => video.play().catch(e => console.log(e)));
-            }
-        }
-        cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
-
-        function cambiarCanal(urlStream) {
-            let select = document.getElementById('channelSelect');
-            let name = select.options[select.selectedIndex].getAttribute('data-nombre');
-            document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${name}`;
-            cargarStream(urlStream);
-        }
-
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('topClock').innerText = now.toLocaleDateString() + ' | ' + now.toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
-</body>
-</html>
