@@ -50,7 +50,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.45); /* Oscurece ligeramente el video para que resalte el contenido */
+            filter: brightness(0.45);
         }
 
         /* Capa de destellos luminosos flotantes sobre el video */
@@ -78,7 +78,6 @@
             80% { opacity: 0.5; }
             100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
-        /* -------------------------------------------------- */
 
         header {
             background: rgba(17, 24, 39, 0.88);
@@ -435,6 +434,7 @@
 </head>
 <body>
 
+    <!-- VIDEO DE FONDO ANIMADO (fondoanimado.mp4) Y LUCES FLOTANTES -->
     <div class="video-background-container">
         <video autoplay muted loop playsinline>
             <source src="fondoanimado.mp4" type="video/mp4">
@@ -454,6 +454,8 @@
             <select id="channelSelect" onchange="cambiarCanal(this.value)">
                 <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
                 <option value="https://vs20.live.opencaster.com/emusic_6696aed5/index.m3u8" data-nombre="EMUSIC">EMUSIC</option>
+                <option value="https://vs20.live.opencaster.com/macronorte_60f657d9/index.m3u8" data-nombre="ECUMBIANET">ECUMBIANET</option>
+                <option value="https://vs20.live.opencaster.com/edx2026_76c0bc4a/index.m3u8" data-nombre="EDX">EDX</option>
             </select>
         </div>
 
@@ -476,6 +478,7 @@
         </div>
 
         <aside class="right-column">
+            <!-- PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada">
@@ -485,6 +488,7 @@
                 </div>
             </a>
 
+            <!-- PATROCINADOR -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
@@ -492,6 +496,7 @@
                 </a>
             </div>
 
+            <!-- CUADRO DE COBERTURA NACIONAL CON FOTOS ROTATIVAS -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
@@ -529,6 +534,7 @@
                 </div>
             </div>
 
+            <!-- SPOT PUBLICITARIO -->
             <div class="ads-vertical-container">
                 <h4>Spot Publicitario</h4>
                 <video class="ads-vertical-media" autoplay muted loop playsinline>
@@ -546,7 +552,7 @@
     <script>
         // Generador de destellos luminosos flotantes sobre el video de fondo
         const sparklesContainer = document.getElementById('sparkles-container');
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 40; i++) {
             const sparkle = document.createElement('div');
             sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
             
