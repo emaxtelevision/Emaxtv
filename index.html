@@ -211,6 +211,7 @@
             border: 2px solid var(--accent-yellow);
             aspect-ratio: 16/9;
             box-shadow: 0 15px 35px rgba(255, 183, 3, 0.3);
+            position: relative;
         }
 
         video {
@@ -345,7 +346,7 @@
             border: 1px solid rgba(255, 183, 3, 0.2);
         }
 
-        /* CUADRO 3: CANALES INFANTILES RECOMENDADOS (EN SU PROPIA PANTALLA) */
+        /* CUADRO 3: CANALES INFANTILES RECOMENDADOS */
         .kids-channels-box {
             width: 100%;
             background: var(--card-bg);
@@ -438,7 +439,7 @@
             padding: 2px;
         }
 
-        /* CUADRO 4: COBERTURA NACIONAL (CIUDADES EN TRANSICIÓN) */
+        /* CUADRO 4: COBERTURA NACIONAL (CIUDADES) */
         .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -522,7 +523,7 @@
             border: 1px solid rgba(255, 183, 3, 0.5);
         }
 
-        /* CUADRO 5: OFICINAS AUTORIZADAS EN SECUENCIA (4s) */
+        /* CUADRO 5: OFICINAS AUTORIZADAS */
         .offices-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -625,6 +626,7 @@
 </head>
 <body>
 
+    <!-- VIDEO DE FONDO ANIMADO ESTABILIZADO -->
     <div class="video-background-container">
         <video autoplay muted loop playsinline>
             <source src="fondoanimado.mp4" type="video/mp4">
@@ -659,7 +661,7 @@
     <main>
         <div class="left-column">
             <div class="player-wrapper">
-                <video id="videoPlayer" controls autoplay muted playsinline></video>
+                <video id="videoPlayer" controls autoplay playsinline></video>
             </div>
             <div class="channel-info">
                 <div><h2 id="channelTitleDisplay">SEÑAL EN VIVO - EMAX TV</h2></div>
@@ -668,6 +670,7 @@
         </div>
 
         <aside class="right-column">
+            <!-- 1. PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada" onerror="this.src='portada.jpg';">
@@ -677,6 +680,7 @@
                 </div>
             </a>
 
+            <!-- 2. PATROCINADOR / PUBLICIDAD EXCLUSIVA -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
@@ -684,6 +688,7 @@
                 </a>
             </div>
 
+            <!-- 3. CANALES INFANTILES RECOMENDADOS -->
             <div class="kids-channels-box">
                 <div class="kids-channels-header">
                     <h4>CANALES INFANTILES RECOMENDADOS POR ENET FIBER PERU</h4>
@@ -716,8 +721,195 @@
                 </div>
             </div>
 
+            <!-- 4. COBERTURA NACIONAL (CIUDADES) -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
                     <div class="city-item active" data-name="Bagua">
                         <img src="bagua.jpg" class="city-slide" alt="Bagua">
+                    </div>
+                    <div class="city-item" data-name="Bellavista">
+                        <img src="bellavista.jpg" class="city-slide" alt="Bellavista">
+                    </div>
+                    <div class="city-item" data-name="Jaén">
+                        <img src="jaen.jpg" class="city-slide" alt="Jaén">
+                    </div>
+                    <div class="city-item" data-name="Juanjui">
+                        <img src="juanjui.jpg" class="city-slide" alt="Juanjui">
+                    </div>
+                    <div class="city-item" data-name="Naranjillo">
+                        <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo">
+                    </div>
+                    <div class="city-item" data-name="El Porvenir">
+                        <img src="porvenir.jpg" class="city-slide" alt="El Porvenir">
+                    </div>
+                    <div class="city-item" data-name="Rioja">
+                        <img src="rioja.jpg" class="city-slide" alt="Rioja">
+                    </div>
+                    <div class="city-item" data-name="Soritor">
+                        <img src="soritor.jpg" class="city-slide" alt="Soritor">
+                    </div>
+                    <div class="city-item" data-name="Trujillo">
+                        <img src="trujillo.jpg" class="city-slide" alt="Trujillo">
+                    </div>
+
+                    <div class="city-name-tag">
+                        <span id="cityNameDisplay">Bagua</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. OFICINAS AUTORIZADAS -->
+            <div class="offices-showcase-box">
+                <div class="offices-showcase-header">
+                    <h4>Nuestras Oficinas Autorizadas</h4>
+                </div>
+                <div class="offices-slideshow-container" id="officesContainer">
+                    <div class="office-item active" data-name="Oficina Alto Mayo">
+                        <img src="oficinaaltomayo.jpg" class="office-slide" alt="Oficina Alto Mayo">
+                    </div>
+                    <div class="office-item" data-name="Oficina Bagua">
+                        <img src="oficinabagua.jpg" class="office-slide" alt="Oficina Bagua">
+                    </div>
+                    <div class="office-item" data-name="Oficina Bagua Grande">
+                        <img src="oficinabaguagrande.jpg" class="office-slide" alt="Oficina Bagua Grande">
+                    </div>
+                    <div class="office-item" data-name="Oficina Jaén">
+                        <img src="oficinajaen.jpg" class="office-slide" alt="Oficina Jaén">
+                    </div>
+                    <div class="office-item" data-name="Oficina Trujillo">
+                        <img src="oficinatrujillo.jpg" class="office-slide" alt="Oficina Trujillo">
+                    </div>
+                    <div class="office-item" data-name="Oficina Yurimaguas">
+                        <img src="oficinayurimaguas.jpg" class="office-slide" alt="Oficina Yurimaguas">
+                    </div>
+                    <div class="office-item" data-name="Oficina Zona Sur Oriente">
+                        <img src="oficinazonasuroriente.jpg" class="office-slide" alt="Oficina Zona Sur Oriente">
+                    </div>
+
+                    <div class="office-name-tag">
+                        <span id="officeNameDisplay">Oficina Alto Mayo</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <span>ENTORNO DIGITAL ONLINE S.A.C.</span></p>
+    </footer>
+
+    <script>
+        // Generador de destellos luminosos flotantes sobre el video de fondo
+        const sparklesContainer = document.getElementById('sparkles-container');
+        for (let i = 0; i < 25; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
+            
+            const size = Math.random() * 6 + 2;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${Math.random() * 100}vw`;
+            
+            const duration = Math.random() * 3 + 3;
+            const delay = Math.random() * 5;
+            sparkle.style.animationDuration = `${duration}s`;
+            sparkle.style.animationDelay = `${delay}s`;
+            sparklesContainer.appendChild(sparkle);
+        }
+
+        // Transición de fotos de ciudades cada 2 segundos
+        let currentCitySlide = 0;
+        const cityItems = document.querySelectorAll('.city-item');
+        const cityNameDisplay = document.getElementById('cityNameDisplay');
+
+        function nextCitySlide() {
+            if (cityItems.length === 0) return;
+            cityItems[currentCitySlide].classList.remove('active');
+            currentCitySlide = (currentCitySlide + 1) % cityItems.length;
+            cityItems[currentCitySlide].classList.add('active');
+            
+            let cityName = cityItems[currentCitySlide].getAttribute('data-name');
+            cityNameDisplay.innerText = cityName;
+        }
+        setInterval(nextCitySlide, 2000);
+
+        // Transición de fotos de oficinas cada 4 segundos
+        let currentOfficeSlide = 0;
+        const officeItems = document.querySelectorAll('.office-item');
+        const officeNameDisplay = document.getElementById('officeNameDisplay');
+
+        function nextOfficeSlide() {
+            if (officeItems.length === 0) return;
+            officeItems[currentOfficeSlide].classList.remove('active');
+            currentOfficeSlide = (currentOfficeSlide + 1) % officeItems.length;
+            officeItems[currentOfficeSlide].classList.add('active');
+            
+            let officeName = officeItems[currentOfficeSlide].getAttribute('data-name');
+            officeNameDisplay.innerText = officeName;
+        }
+        setInterval(nextOfficeSlide, 4000);
+
+        // --- MOTOR DE REPRODUCCIÓN HLS MEJORADO (Soluciona pantalla negra) ---
+        var video = document.getElementById('videoPlayer');
+        var hls;
+
+        function cargarStream(url) {
+            if (hls) {
+                hls.destroy();
+            }
+            if (Hls.isSupported()) {
+                hls = new Hls({
+                    xhrSetup: function (xhr, url) {
+                        xhr.withCredentials = false;
+                    }
+                });
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play().catch(e => console.log("Autoplay bloqueado o esperando interacción", e));
+                });
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    if (data.fatal) {
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                console.log("Error de red intentando recuperar...");
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                console.log("Error multimedia intentando recuperar...");
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                hls.destroy();
+                                break;
+                        }
+                    }
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.addEventListener('loadedmetadata', function () {
+                    video.play().catch(e => console.log(e));
+                });
+            }
+        }
+
+        // Cargar el canal inicial al abrir la página
+        cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
+
+        function cambiarCanal(urlStream) {
+            let select = document.getElementById('channelSelect');
+            let name = select.options[select.selectedIndex].getAttribute('data-nombre');
+            document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${name}`;
+            cargarStream(urlStream);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('topClock').innerText = now.toLocaleDateString() + ' | ' + now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
