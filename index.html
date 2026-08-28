@@ -260,7 +260,7 @@
             gap: 1.2rem;
         }
 
-        /* PORTADA INTERACTIVA */
+        /* PANTALLA 1: PORTADA INTERACTIVA */
         .cover-banner-box {
             width: 100%;
             background: var(--card-bg);
@@ -311,14 +311,15 @@
             letter-spacing: 1px;
         }
 
-        /* CUADRO DE PATROCINADOR / PUBLICIDAD */
+        /* PANTALLA 2: PATROCINADORES / PUBLICIDAD */
         .ads-vertical-container {
             width: 100%;
             background: var(--card-bg);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 183, 3, 0.4);
+            border: 2px solid var(--accent-yellow);
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
@@ -332,18 +333,19 @@
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .ads-vertical-media {
             width: 100%;
-            max-height: 350px;
+            max-height: 300px;
             border-radius: 8px;
             object-fit: cover;
             display: block;
             border: 1px solid rgba(255, 183, 3, 0.2);
         }
 
-        /* CUADRO DE CIUDADES / COBERTURA NACIONAL CON TRANSICIÓN */
+        /* PANTALLA 3: COBERTURA NACIONAL (CIUDADES SOLAS EN TRANSICIÓN) */
         .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -369,6 +371,7 @@
             color: var(--accent-yellow);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .slideshow-container {
@@ -426,7 +429,7 @@
             border: 1px solid rgba(255, 183, 3, 0.5);
         }
 
-        /* CUADRO DE OFICINAS EN SECUENCIA (4 segundos por foto) */
+        /* PANTALLA 4: OFICINAS AUTORIZADAS EN SECUENCIA (4s) */
         .offices-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -452,6 +455,7 @@
             color: var(--accent-yellow);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .offices-slideshow-container {
@@ -572,7 +576,7 @@
         </div>
 
         <aside class="right-column">
-            <!-- PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
+            <!-- PANTALLA 1: PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada" onerror="this.src='portada.jpg';">
@@ -582,15 +586,15 @@
                 </div>
             </a>
 
-            <!-- PATROCINADOR / PUBLICIDAD EXCLUSIVA -->
+            <!-- PANTALLA 2: PATROCINADOR / PUBLICIDAD EXCLUSIVA (SEPARADO) -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
-                    <img src="anuncio.jpg" alt="Patrocinador Oficial" class="ads-vertical-media">
+                    <img src="anuncio.jpg" alt="Patrocinador Oficial" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/640x360/1f1301/ffb703?text=Patrocinador+Exclusivo';">
                 </a>
             </div>
 
-            <!-- CUADRO DE COBERTURA NACIONAL (CIUDADES EN TRANSICIÓN) -->
+            <!-- PANTALLA 3: COBERTURA NACIONAL (CIUDADES SOLAS EN TRANSICIÓN) -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
@@ -628,7 +632,7 @@
                 </div>
             </div>
 
-            <!-- CUADRO DE OFICINAS EN SECUENCIA (4 segundos por foto) -->
+            <!-- PANTALLA 4: OFICINAS AUTORIZADAS (SEPARADO Y EN SECUENCIA DE 4 SEGUNDOS) -->
             <div class="offices-showcase-box">
                 <div class="offices-showcase-header">
                     <h4>Nuestras Oficinas Autorizadas</h4>
