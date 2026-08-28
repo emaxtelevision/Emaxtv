@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO para aparecer en Google -->
     <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
     <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emusic, Cumbianet, Edx, Emax Tv y canales en vivo en alta definición.">
     <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emusic, Cumbianet, Edx, Emax Tv, Selva TV, En Vivo">
     <meta name="author" content="Entorno Digital Online S.A.C.">
     
+    <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
     <style>
@@ -99,87 +101,19 @@
             100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
 
-        /* Cabecera con Banner Superior e Insignia Grande */
+        /* Cabecera */
         header {
             background: rgba(17, 24, 39, 0.92);
             backdrop-filter: blur(16px);
-            display: flex;
-            flex-direction: column;
-            border-bottom: 2px solid rgba(255, 183, 3, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-            z-index: 10;
-        }
-
-        /* Contenedor del Banner con Transición de Fotos a 2 Segundos */
-        .trujillo-banner-top {
-            width: 100%;
-            height: 110px;
-            overflow: hidden;
-            position: relative;
-            border-bottom: 2px solid var(--accent-yellow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .banner-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out;
-            filter: brightness(0.45);
-        }
-
-        .banner-slide.active {
-            opacity: 1;
-        }
-
-        .trujillo-banner-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(31, 19, 1, 0.4) 0%, rgba(11, 19, 39, 0.8) 100%);
-            z-index: 1;
-        }
-
-        .banner-company-title {
-            position: relative;
-            z-index: 2;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-align: center;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(255, 183, 3, 0.9), 0 0 30px rgba(0, 180, 216, 0.7), 0 2px 5px rgba(0, 0, 0, 0.9);
-            padding: 0 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .banner-company-title {
-                font-size: 1.4rem;
-                letter-spacing: 1.5px;
-            }
-            .trujillo-banner-top {
-                height: 90px;
-            }
-        }
-
-        .header-main-content {
             padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
+            border-bottom: 2px solid rgba(255, 183, 3, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            z-index: 10;
         }
 
         .brand-container {
@@ -298,6 +232,7 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
+        /* Contenido Principal en Grid (Reproductor + Cuadro de Ciudades) */
         main {
             flex: 1;
             max-width: 1300px;
@@ -382,110 +317,80 @@
             box-shadow: 0 6px 20px rgba(24, 119, 242, 0.7);
         }
 
-        .ads-vertical-container {
+        /* CUADRO DE CIUDADES EN LA PARTE INDICADA (Estilo Tarjeta con Transición de 2s) */
+        .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 183, 3, 0.4);
+            border: 2px solid var(--accent-yellow);
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 12px;
-            margin-top: 15px;
         }
 
-        .ads-vertical-container h4 {
-            font-size: 0.85rem;
+        .cities-showcase-header {
+            background: rgba(31, 19, 1, 0.9);
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 183, 3, 0.3);
+        }
+
+        .cities-showcase-header h4 {
+            font-size: 0.9rem;
             color: var(--accent-yellow);
-            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
-        .ads-vertical-media {
+        .slideshow-container {
+            position: relative;
             width: 100%;
-            max-height: 400px;
-            border-radius: 8px;
+            aspect-ratio: 9/16;
+            max-height: 420px;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .city-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            display: block;
-            outline: none;
-            border: 1px solid rgba(255, 183, 3, 0.2);
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
         }
 
-        .news-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            height: fit-content;
+        .city-slide.active {
+            opacity: 1;
         }
 
-        .news-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--accent-yellow);
-            padding-bottom: 0.8rem;
+        /* Etiqueta flotante con el nombre de cada ciudad en la parte inferior */
+        .city-name-tag {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            padding: 20px 10px 10px 10px;
+            text-align: center;
         }
 
-        .news-header h3 {
+        .city-name-tag span {
             color: var(--accent-yellow);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 8px rgba(255, 183, 3, 0.4);
-        }
-
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        .news-item {
-            display: block;
-            text-decoration: none;
-            background: rgba(31, 19, 1, 0.6);
-            padding: 12px;
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-yellow);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .news-item:hover {
-            transform: translateX(4px);
-            background: rgba(31, 19, 1, 0.9);
-            border-left-color: var(--accent-cyan);
-            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
-        }
-
-        .news-item .news-date {
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            margin-bottom: 3px;
-            display: block;
-        }
-
-        .news-item h4 {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 4px;
-        }
-
-        .news-item p {
-            font-size: 0.85rem;
-            color: var(--text-gray);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            background: rgba(17, 24, 39, 0.7);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 183, 3, 0.5);
         }
 
         footer {
@@ -511,54 +416,38 @@
     <div id="sparkles-container"></div>
 
     <header>
-        <div class="trujillo-banner-top" id="sliderContainer">
-            <div class="trujillo-banner-overlay"></div>
-            <img src="bagua.jpg" class="banner-slide active" alt="Bagua" onerror="this.style.display='none';">
-            <img src="bellavista.jpg" class="banner-slide" alt="Bellavista" onerror="this.style.display='none';">
-            <img src="jaen.jpg" class="banner-slide" alt="Jaen" onerror="this.style.display='none';">
-            <img src="juanjui.jpg" class="banner-slide" alt="Juanjui" onerror="this.style.display='none';">
-            <img src="naranjillo.jpg" class="banner-slide" alt="Naranjillo" onerror="this.style.display='none';">
-            <img src="porvenir.jpg" class="banner-slide" alt="Porvenir" onerror="this.style.display='none';">
-            <img src="rioja.jpg" class="banner-slide" alt="Rioja" onerror="this.style.display='none';">
-            <img src="soritor.jpg" class="banner-slide" alt="Soritor" onerror="this.style.display='none';">
-            <img src="trujillo.jpg" class="banner-slide" alt="Trujillo" onerror="this.style.display='none';">
-            
-            <h2 class="banner-company-title">ENTORNO DIGITAL ONLINE S.A.C.</h2>
+        <div class="brand-container">
+            <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo">
+            <div class="logo-container">
+                <h1>ENET FIBER <span>PERÚ</span></h1>
+                <span class="location-tag" id="currentLocationTag">ENTORNO DIGITAL ONLINE S.A.C.</span>
+            </div>
         </div>
 
-        <div class="header-main-content">
-            <div class="brand-container">
-                <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo">
-                <div class="logo-container">
-                    <h1>ENET FIBER <span>PERÚ</span></h1>
-                    <span class="location-tag" id="currentLocationTag">SEÑAL EN VIVO</span>
-                </div>
-            </div>
+        <div class="channel-selector-bar">
+            <label for="channelSelect">📺 CANAL:</label>
+            <select id="channelSelect" onchange="cambiarCanal(this.value)">
+                <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
+                <option value="https://vs20.live.opencaster.com/emusic_6696aed5/index.m3u8" data-nombre="EMUSIC">EMUSIC</option>
+                <option value="" data-nombre="CUMBIANET">CUMBIANET</option>
+                <option value="" data-nombre="EDX">EDX</option>
+                <option value="" data-nombre="EDX+">EDX+</option>
+                <option value="" data-nombre="EDX3">EDX3</option>
+                <option value="" data-nombre="EALTOMAYO">EALTOMAYO</option>
+                <option value="" data-nombre="ENORORIENTE">ENORORIENTE</option>
+                <option value="" data-nombre="SELVA TV">SELVA TV</option>
+            </select>
+        </div>
 
-            <div class="channel-selector-bar">
-                <label for="channelSelect">📺 CANAL:</label>
-                <select id="channelSelect" onchange="cambiarCanal(this.value)">
-                    <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
-                    <option value="https://vs20.live.opencaster.com/emusic_6696aed5/index.m3u8" data-nombre="EMUSIC">EMUSIC</option>
-                    <option value="" data-nombre="CUMBIANET">CUMBIANET</option>
-                    <option value="" data-nombre="EDX">EDX</option>
-                    <option value="" data-nombre="EDX+">EDX+</option>
-                    <option value="" data-nombre="EDX3">EDX3</option>
-                    <option value="" data-nombre="EALTOMAYO">EALTOMAYO</option>
-                    <option value="" data-nombre="ENORORIENTE">ENORORIENTE</option>
-                    <option value="" data-nombre="SELVA TV">SELVA TV</option>
-                </select>
-            </div>
-
-            <div class="header-stats">
-                <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
-                <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
-                <div class="live-badge">● EN VIVO</div>
-            </div>
+        <div class="header-stats">
+            <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
+            <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
+            <div class="live-badge">● EN VIVO</div>
         </div>
     </header>
 
     <main>
+        <!-- Columna Izquierda: Reproductor -->
         <div class="left-column">
             <div class="player-wrapper">
                 <video id="videoPlayer" controls autoplay muted playsinline></video>
@@ -574,39 +463,26 @@
             </div>
         </div>
 
-        <aside class="news-section">
-            <div class="news-header">
-                <h3>NOTICIAS AL DÍA</h3>
+        <!-- Columna Derecha: Cuadro con la transición automática de fotos de ciudades y sus nombres -->
+        <aside class="cities-showcase-box">
+            <div class="cities-showcase-header">
+                <h4>Cobertura Nacional - ENET Fiber</h4>
             </div>
-
-            <div class="news-list" id="newsContainer">
-                <div class="news-item">
-                    <span class="news-date">Cargando...</span>
-                    <h4>Actualizando boletín informativo</h4>
-                    <p>Obteniendo las últimas novedades...</p>
+            <div class="slideshow-container" id="slideshowContainer">
+                <!-- Las imágenes rotarán cada 2 segundos con su respectivo nombre abajo -->
+                <img src="bagua.jpg" class="city-slide active" data-name="Bagua" alt="Bagua" onerror="this.style.display='none';">
+                <img src="bellavista.jpg" class="city-slide" data-name="Bellavista" alt="Bellavista" onerror="this.style.display='none';">
+                <img src="jaen.jpg" class="city-slide" data-name="Jaen" alt="Jaen" onerror="this.style.display='none';">
+                <img src="juanjui.jpg" class="city-slide" data-name="Juanjui" alt="Juanjui" onerror="this.style.display='none';">
+                <img src="naranjillo.jpg" class="city-slide" data-name="Naranjillo" alt="Naranjillo" onerror="this.style.display='none';">
+                <img src="porvenir.jpg" class="city-slide" data-name="Porvenir" alt="Porvenir" onerror="this.style.display='none';">
+                <img src="rioja.jpg" class="city-slide" data-name="Rioja" alt="Rioja" onerror="this.style.display='none';">
+                <img src="soritor.jpg" class="city-slide" data-name="Soritor" alt="Soritor" onerror="this.style.display='none';">
+                <img src="trujillo.jpg" class="city-slide" data-name="Trujillo" alt="Trujillo" onerror="this.style.display='none';">
+                
+                <div class="city-name-tag">
+                    <span id="cityNameDisplay">Bagua</span>
                 </div>
-            </div>
-
-            <div class="ads-vertical-container">
-                <h4>Patrocinador Exclusivo</h4>
-                <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
-                    <img src="anuncio.jpg" alt="Anuncio Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/3d2c04/ffb703?text=PUBLICIDAD+VERTICAL';">
-                </a>
-            </div>
-
-            <div class="ads-vertical-container">
-                <h4>Spot Publicitario</h4>
-                <video class="ads-vertical-media" autoplay muted loop playsinline>
-                    <source src="anuncio.mp4" type="video/mp4">
-                    Tu navegador no soporta videos publicitarios.
-                </video>
-            </div>
-
-            <div class="ads-vertical-container">
-                <h4>Espacio Comercial</h4>
-                <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
-                    <img src="anuncio1.jpg" alt="Patrocinador Oficial Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/3d2c04/ffb703?text=PATROCINADOR+OFICIAL';">
-                </a>
             </div>
         </aside>
     </main>
@@ -616,19 +492,30 @@
     </footer>
 
     <script>
-        // Transición automática (Slider) configurada exactamente a 2 segundos por foto en loop
+        // Transición automática de fotos de ciudades cada 2 segundos con actualización de nombre
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.banner-slide');
-        
-        function nextSlide() {
+        const slides = document.querySelectorAll('.city-slide');
+        const cityNameDisplay = document.getElementById('cityNameDisplay');
+
+        function nextCitySlide() {
             if (slides.length === 0) return;
+            
+            // Ocultar slide actual
             slides[currentSlide].classList.remove('active');
+            
+            // Avanzar al siguiente index
             currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Mostrar nuevo slide
             slides[currentSlide].classList.add('active');
+            
+            // Actualizar nombre de la ciudad en la parte inferior
+            let cityName = slides[currentSlide].getAttribute('data-name');
+            cityNameDisplay.innerText = cityName;
         }
-        
-        // 2000 milisegundos = 2 segundos exactos
-        setInterval(nextSlide, 2000);
+
+        // Intervalo exacto de 2000 ms (2 segundos)
+        setInterval(nextCitySlide, 2000);
 
         // Generador de destellos flotantes
         const sparklesContainer = document.getElementById('sparkles-container');
@@ -717,47 +604,6 @@
             document.getElementById('count').innerText = visits;
         }
         updateVisitorCounter();
-
-        const noticiasCanal = [
-            {
-                fecha: "🔴 Destacado de Hoy",
-                titulo: "Gran cobertura informativa nacional y regional",
-                contenido: "Nuestros equipos periodísticos recorren los puntos clave en vivo.",
-                enlace: "https://news.google.com/search?q=Peru%20noticias&hl=es-419&gl=PE&ceid=PE%3Aes-419"
-            },
-            {
-                fecha: "Actualidad",
-                titulo: "Nuevos programas musicales y culturales",
-                contenido: "Anunciamos la incorporación de espacios dedicados al arte, música y talento local.",
-                enlace: "https://news.google.com/search?q=actualidad%20cultural%20Peru&hl=es-419&gl=PE&ceid=PE%3Aes-419"
-            },
-            {
-                fecha: "Deportes",
-                titulo: "Resumen deportivo del fin de semana",
-                contenido: "Entérate de los resultados de los equipos y disciplinas de todas las regiones.",
-                enlace: "https://news.google.com/search?q=deportes%20Peru%20futbol&hl=es-419&gl=PE&ceid=PE%3Aes-419"
-            }
-        ];
-
-        function cargarNoticiasAutomaticas() {
-            const contenedor = document.getElementById('newsContainer');
-            contenedor.innerHTML = "";
-
-            noticiasCanal.forEach(noticia => {
-                const item = document.createElement('a');
-                item.href = noticia.enlace;
-                item.target = "_blank";
-                item.classList.add('news-item');
-                item.innerHTML = `
-                    <span class="news-date">${noticia.fecha}</span>
-                    <h4>${noticia.titulo} ↗</h4>
-                    <p>${noticia.contenido}</p>
-                `;
-                contenedor.appendChild(item);
-            });
-        }
-
-        cargarNoticiasAutomaticas();
     </script>
 </body>
 </html>
