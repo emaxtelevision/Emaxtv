@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO para aparecer en Google -->
     <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
     <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emusic, Cumbianet, Edx, Emax Tv y canales en vivo en alta definición.">
     <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emusic, Cumbianet, Edx, Emax Tv, Selva TV, En Vivo">
     <meta name="author" content="Entorno Digital Online S.A.C.">
     
+    <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
     <style>
@@ -110,6 +112,7 @@
             z-index: 10;
         }
 
+        /* Contenedor del Banner con Transición de Fotos */
         .trujillo-banner-top {
             width: 100%;
             height: 110px;
@@ -121,7 +124,7 @@
             justify-content: center;
         }
 
-        .trujillo-banner-top img {
+        .banner-slide {
             position: absolute;
             top: 0;
             left: 0;
@@ -130,7 +133,13 @@
             object-fit: cover;
             object-position: center;
             display: block;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
             filter: brightness(0.45);
+        }
+
+        .banner-slide.active {
+            opacity: 1;
         }
 
         .trujillo-banner-overlay {
@@ -140,6 +149,7 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle, rgba(31, 19, 1, 0.4) 0%, rgba(11, 19, 39, 0.8) 100%);
+            z-index: 1;
         }
 
         .banner-company-title {
@@ -410,7 +420,6 @@
         .news-section {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 183, 3, 0.4);
             border-radius: 12px;
             padding: 1.5rem;
             display: flex;
@@ -504,9 +513,20 @@
     <div id="sparkles-container"></div>
 
     <header>
-        <div class="trujillo-banner-top">
+        <!-- Franja Superior con Transición Automática (Slider) de las Ciudades -->
+        <div class="trujillo-banner-top" id="sliderContainer">
             <div class="trujillo-banner-overlay"></div>
-            <img src="trujillo.jpg" alt="Enet Fiber Peru" onerror="this.style.display='none';">
+            <!-- Imágenes en formato JPG para la transición -->
+            <img src="bagua.jpg" class="banner-slide active" alt="Bagua" onerror="this.style.display='none';">
+            <img src="bellavista.jpg" class="banner-slide" alt="Bellavista" onerror="this.style.display='none';">
+            <img src="jaen.jpg" class="banner-slide" alt="Jaen" onerror="this.style.display='none';">
+            <img src="juanjui.jpg" class="banner-slide" alt="Juanjui" onerror="this.style.display='none';">
+            <img src="naranjillo.jpg" class="banner-slide" alt="Naranjillo" onerror="this.style.display='none';">
+            <img src="porvenir.jpg" class="banner-slide" alt="Porvenir" onerror="this.style.display='none';">
+            <img src="rioja.jpg" class="banner-slide" alt="Rioja" onerror="this.style.display='none';">
+            <img src="soritor.jpg" class="banner-slide" alt="Soritor" onerror="this.style.display='none';">
+            <img src="trujillo.jpg" class="banner-slide" alt="Trujillo" onerror="this.style.display='none';">
+            
             <h2 class="banner-company-title">ENTORNO DIGITAL ONLINE S.A.C.</h2>
         </div>
 
@@ -600,6 +620,21 @@
     </footer>
 
     <script>
+        // Transición automática (Slider) de las fotos de ciudades en formato JPG
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        
+        function nextSlide() {
+            if (slides.length === 0) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // Cambia de foto cada 4 segundos
+        setInterval(nextSlide, 4000);
+
+        // Generador de destellos flotantes
         const sparklesContainer = document.getElementById('sparkles-container');
         for (let i = 0; i < 40; i++) {
             const sparkle = document.createElement('div');
