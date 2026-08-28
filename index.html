@@ -275,7 +275,7 @@
             border: 1px solid rgba(255, 183, 3, 0.2);
         }
 
-        /* CUADRO DE CIUDADES ROTATIVAS */
+        /* CUADRO DE CIUDADES CON FOTOS EN TRANSICIÓN */
         .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -303,30 +303,55 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #2c1d02, #111827);
+            background: #1f1301;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .city-display-box {
+        .city-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .city-item.active {
+            opacity: 1;
+        }
+
+        .city-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Etiqueta flotante con el nombre de la ciudad */
+        .city-name-tag {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            padding: 15px 10px 8px 10px;
             text-align: center;
-            padding: 20px;
+            z-index: 5;
         }
 
-        .city-display-box h3 {
+        .city-name-tag span {
             color: var(--accent-yellow);
-            font-size: 1.6rem;
-            letter-spacing: 2px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
-            margin-bottom: 5px;
-        }
-
-        .city-display-box p {
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            background: rgba(17, 24, 39, 0.85);
+            padding: 3px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 183, 3, 0.5);
         }
 
         footer {
@@ -380,7 +405,7 @@
         </div>
 
         <aside class="right-column">
-            <!-- PORTADA INTERACTIVA CON ENLACE A enet.com.pe (Actualizado a portada.jpeg) -->
+            <!-- PORTADA INTERACTIVA -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada">
@@ -390,7 +415,7 @@
                 </div>
             </a>
 
-            <!-- PATROCINADOR / PUBLICIDAD 1 -->
+            <!-- PATROCINADOR -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
@@ -398,18 +423,45 @@
                 </a>
             </div>
 
-            <!-- COBERTURA NACIONAL -->
+            <!-- CUADRO DE COBERTURA NACIONAL CON FOTOS ROTATIVAS -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
-                <div class="slideshow-container">
-                    <div class="city-display-box">
-                        <h3 id="cityNameDisplay">Bagua</h3>
-                        <p>SEÑAL NACIONAL</p>
+                <div class="slideshow-container" id="slideshowContainer">
+                    <div class="city-item active" data-name="Bagua">
+                        <img src="bagua.jpg" class="city-slide" alt="Bagua">
+                    </div>
+                    <div class="city-item" data-name="Bellavista">
+                        <img src="bellavista.jpg" class="city-slide" alt="Bellavista">
+                    </div>
+                    <div class="city-item" data-name="Jaén">
+                        <img src="jaen.jpg" class="city-slide" alt="Jaén">
+                    </div>
+                    <div class="city-item" data-name="Juanjui">
+                        <img src="juanjui.jpg" class="city-slide" alt="Juanjui">
+                    </div>
+                    <div class="city-item" data-name="Naranjillo">
+                        <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo">
+                    </div>
+                    <div class="city-item" data-name="El Porvenir">
+                        <img src="porvenir.jpg" class="city-slide" alt="El Porvenir">
+                    </div>
+                    <div class="city-item" data-name="Rioja">
+                        <img src="rioja.jpg" class="city-slide" alt="Rioja">
+                    </div>
+                    <div class="city-item" data-name="Soritor">
+                        <img src="soritor.jpg" class="city-slide" alt="Soritor">
+                    </div>
+                    <div class="city-item" data-name="Trujillo">
+                        <img src="trujillo.jpg" class="city-slide" alt="Trujillo">
+                    </div>
+
+                    <div class="city-name-tag">
+                        <span id="cityNameDisplay">Bagua</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SPOT PUBLICITARIO EN VIDEO -->
+            <!-- SPOT PUBLICITARIO -->
             <div class="ads-vertical-container">
                 <h4>Spot Publicitario</h4>
                 <video class="ads-vertical-media" autoplay muted loop playsinline>
@@ -425,15 +477,21 @@
     </footer>
 
     <script>
-        const cities = ["Bagua", "Bellavista", "Jaén", "Juanjui", "Naranjillo", "El Porvenir", "Rioja", "Soritor", "Trujillo"];
-        let currentCityIndex = 0;
+        // Transición de fotos de ciudades cada 2 segundos
+        let currentSlide = 0;
+        const cityItems = document.querySelectorAll('.city-item');
         const cityNameDisplay = document.getElementById('cityNameDisplay');
 
-        function rotateCities() {
-            currentCityIndex = (currentCityIndex + 1) % cities.length;
-            cityNameDisplay.innerText = cities[currentCityIndex];
+        function nextCitySlide() {
+            if (cityItems.length === 0) return;
+            cityItems[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % cityItems.length;
+            cityItems[currentSlide].classList.add('active');
+            
+            let cityName = cityItems[currentSlide].getAttribute('data-name');
+            cityNameDisplay.innerText = cityName;
         }
-        setInterval(rotateCities, 2000);
+        setInterval(nextCitySlide, 2000);
 
         var video = document.getElementById('videoPlayer');
         var hls;
