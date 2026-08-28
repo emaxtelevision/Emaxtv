@@ -304,7 +304,7 @@
             letter-spacing: 1px;
         }
 
-        /* CANALES INFANTILES RECOMENDADOS */
+        /* CANALES INFANTILES EN DISEÑO CIRCULAR */
         .kids-channels-box {
             width: 100%;
             background: var(--card-bg);
@@ -315,12 +315,12 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
-            padding: 12px;
+            padding: 15px;
         }
 
         .kids-channels-header {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             border-bottom: 1px solid rgba(255, 183, 3, 0.3);
             padding-bottom: 8px;
         }
@@ -336,32 +336,36 @@
         .kids-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 15px;
+            justify-items: center;
         }
 
-        .kid-logo-card {
-            background: rgba(31, 19, 1, 0.6);
-            border: 1px solid rgba(255, 183, 3, 0.3);
-            border-radius: 8px;
+        .kid-circle-card {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: rgba(31, 19, 1, 0.8);
+            border: 2px solid var(--accent-yellow);
             overflow: hidden;
-            aspect-ratio: 16/9;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            padding: 6px;
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .kid-logo-card:hover {
-            transform: scale(1.05);
+        .kid-circle-card:hover {
+            transform: scale(1.12);
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
         }
 
-        .kid-logo-card img {
+        .kid-circle-card img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
             display: block;
         }
 
@@ -463,6 +467,7 @@
 </head>
 <body>
 
+    <!-- VIDEO DE FONDO ANIMADO (fondoanimado.mp4) Y LUCES FLOTANTES -->
     <div class="video-background-container">
         <video autoplay muted loop playsinline>
             <source src="fondoanimado.mp4" type="video/mp4">
@@ -506,6 +511,7 @@
         </div>
 
         <aside class="right-column">
+            <!-- PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada">
@@ -515,20 +521,22 @@
                 </div>
             </a>
 
+            <!-- CANALES INFANTILES EN CÍRCULOS -->
             <div class="kids-channels-box">
                 <div class="kids-channels-header">
                     <h4>CANALES INFANTILES RECOMENDADOS POR ENET FIBER PERU</h4>
                 </div>
                 <div class="kids-grid">
-                    <div class="kid-logo-card"><img src="bitme.jpg" alt="Bitme" onerror="this.style.display='none';"></div>
-                    <div class="kid-logo-card"><img src="cartoonito.jpg" alt="Cartoonito" onerror="this.style.display='none';"></div>
-                    <div class="kid-logo-card"><img src="cartoonnetwork.jpg" alt="Cartoon Network" onerror="this.style.display='none';"></div>
-                    <div class="kid-logo-card"><img src="clan.jpg" alt="Clan" onerror="this.style.display='none';"></div>
-                    <div class="kid-logo-card"><img src="discovery_kids_logo.jpg" alt="Discovery Kids" onerror="this.style.display='none';"></div>
-                    <div class="kid-logo-card"><img src="dreamworks.jpg" alt="Dreamworks" onerror="this.style.display='none';"></div>
+                    <div class="kid-circle-card"><img src="bitme.jpg" alt="Bitme" onerror="this.style.display='none';"></div>
+                    <div class="kid-circle-card"><img src="Cartoonito.jpg" alt="Cartoonito" onerror="this.style.display='none';"></div>
+                    <div class="kid-circle-card"><img src="cartoonnetwor.jpg" alt="Cartoon Network" onerror="this.style.display='none';"></div>
+                    <div class="kid-circle-card"><img src="clan.jpg" alt="Clan" onerror="this.style.display='none';"></div>
+                    <div class="kid-circle-card"><img src="Discovery_kids_logo.jpg" alt="Discovery Kids" onerror="this.style.display='none';"></div>
+                    <div class="kid-circle-card"><img src="dreamworks.jpg" alt="Dreamworks" onerror="this.style.display='none';"></div>
                 </div>
             </div>
 
+            <!-- CUADRO DE COBERTURA NACIONAL CON FOTOS ROTATIVAS -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
