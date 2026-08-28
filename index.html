@@ -99,7 +99,7 @@
             100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
 
-        /* Cabecera Adaptable */
+        /* Cabecera Adaptable con Pestaña adjunta */
         header {
             background: rgba(17, 24, 39, 0.92);
             backdrop-filter: blur(16px);
@@ -152,6 +152,30 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
+        }
+
+        /* Enlace / Pestaña adjunta a enet.com.pe */
+        .external-tab-btn {
+            background: rgba(255, 183, 3, 0.15);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+            padding: 6px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px rgba(255, 183, 3, 0.2);
+        }
+
+        .external-tab-btn:hover {
+            background: var(--accent-yellow);
+            color: #111827;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.5);
         }
 
         .channel-selector-bar {
@@ -230,7 +254,7 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Contenido Principal en Grid Optimizada para Móvil y PC */
+        /* Contenido Principal en Grid */
         main {
             flex: 1;
             max-width: 1300px;
@@ -295,7 +319,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Botón de Redes Sociales optimizado para PC y Móvil */
         .btn-facebook {
             background-color: #1877f2;
             color: white;
@@ -315,7 +338,7 @@
 
         @media (max-width: 600px) {
             .btn-facebook {
-                width: 100%; /* Botón expandido en celulares para fácil toque */
+                width: 100%;
             }
         }
 
@@ -325,7 +348,6 @@
             box-shadow: 0 6px 20px rgba(24, 119, 242, 0.7);
         }
 
-        /* Columna Derecha: Ciudades + Publicidad + Redes secundarias */
         .right-column {
             display: flex;
             flex-direction: column;
@@ -425,286 +447,4 @@
             background: rgba(17, 24, 39, 0.85);
             padding: 3px 10px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 183, 3, 0.5);
-        }
-
-        /* SECCIÓN DE PUBLICIDAD VERTICAL */
-        .ads-vertical-container {
-            width: 100%;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 183, 3, 0.4);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .ads-vertical-container h4 {
-            font-size: 0.8rem;
-            color: var(--accent-yellow);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .ads-vertical-media {
-            width: 100%;
-            max-height: 350px;
-            border-radius: 8px;
-            object-fit: cover;
-            display: block;
-            border: 1px solid rgba(255, 183, 3, 0.2);
-        }
-
-        /* Pie de página */
-        footer {
-            background-color: rgba(31, 19, 1, 0.95);
-            backdrop-filter: blur(12px);
-            text-align: center;
-            padding: 1.2rem;
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            border-top: 1px solid rgba(255, 183, 3, 0.3);
-            z-index: 10;
-        }
-
-        footer span {
-            color: var(--accent-yellow);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="pro-tv-background"></div>
-    <div class="dynamic-waves"></div>
-    <div id="sparkles-container"></div>
-
-    <header>
-        <div class="brand-container">
-            <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo" onerror="this.style.display='none';">
-            <div class="logo-container">
-                <h1>ENET FIBER <span>PERÚ</span></h1>
-                <span class="location-tag">ENTORNO DIGITAL ONLINE S.A.C.</span>
-            </div>
-        </div>
-
-        <div class="channel-selector-bar">
-            <label for="channelSelect">📺 CANAL:</label>
-            <select id="channelSelect" onchange="cambiarCanal(this.value)">
-                <option value="https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8" data-nombre="EMAX TV">EMAX TV</option>
-                <option value="https://vs20.live.opencaster.com/emusic_6696aed5/index.m3u8" data-nombre="EMUSIC">EMUSIC</option>
-                <option value="" data-nombre="CUMBIANET">CUMBIANET</option>
-                <option value="" data-nombre="EDX">EDX</option>
-                <option value="" data-nombre="EDX+">EDX+</option>
-                <option value="" data-nombre="EDX3">EDX3</option>
-                <option value="" data-nombre="EALTOMAYO">EALTOMAYO</option>
-                <option value="" data-nombre="ENORORIENTE">ENORORIENTE</option>
-                <option value="" data-nombre="SELVA TV">SELVA TV</option>
-            </select>
-        </div>
-
-        <div class="header-stats">
-            <div class="top-clock" id="topClock">Cargando fecha y hora...</div>
-            <div class="visitor-counter">Visitas: <span id="count">1250</span></div>
-            <div class="live-badge">● EN VIVO</div>
-        </div>
-    </header>
-
-    <main>
-        <div class="left-column">
-            <div class="player-wrapper">
-                <video id="videoPlayer" controls autoplay muted playsinline></video>
-            </div>
-
-            <div class="channel-info">
-                <div>
-                    <h2 id="channelTitleDisplay">SEÑAL EN VIVO - EMAX TV PARA EL MUNDO</h2>
-                </div>
-                <a href="https://www.facebook.com/enetfiberperu" target="_blank" class="btn-facebook">
-                    👍 Síguenos en Facebook
-                </a>
-            </div>
-        </div>
-
-        <aside class="right-column">
-            <div class="cities-showcase-box">
-                <div class="cities-showcase-header">
-                    <h4>Cobertura Nacional - ENET Fiber</h4>
-                </div>
-                <div class="slideshow-container" id="slideshowContainer">
-                    <div class="city-item active" data-name="Bagua">
-                        <img src="bagua.jpg" class="city-slide" alt="Bagua" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ BAGUA</div>
-                    </div>
-                    <div class="city-item" data-name="Bellavista">
-                        <img src="bellavista.jpg" class="city-slide" alt="Bellavista" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ BELLAVISTA</div>
-                    </div>
-                    <div class="city-item" data-name="Jaen">
-                        <img src="jaen.jpg" class="city-slide" alt="Jaen" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ JAÉN</div>
-                    </div>
-                    <div class="city-item" data-name="Juanjui">
-                        <img src="juanjui.jpg" class="city-slide" alt="Juanjui" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ JUANJUI</div>
-                    </div>
-                    <div class="city-item" data-name="Naranjillo">
-                        <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ NARANJILLO</div>
-                    </div>
-                    <div class="city-item" data-name="Porvenir">
-                        <img src="porvenir.jpg" class="city-slide" alt="Porvenir" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ EL PORVENIR</div>
-                    </div>
-                    <div class="city-item" data-name="Rioja">
-                        <img src="rioja.jpg" class="city-slide" alt="Rioja" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ RIOJA</div>
-                    </div>
-                    <div class="city-item" data-name="Soritor">
-                        <img src="soritor.jpg" class="city-slide" alt="Soritor" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ SORITOR</div>
-                    </div>
-                    <div class="city-item" data-name="Trujillo">
-                        <img src="trujillo.jpg" class="city-slide" alt="Trujillo" onerror="this.style.display='none';">
-                        <div class="slide-fallback">🏙️ TRUJILLO</div>
-                    </div>
-
-                    <div class="city-name-tag">
-                        <span id="cityNameDisplay">Bagua</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ads-vertical-container">
-                <h4>Patrocinador Exclusivo</h4>
-                <a href="https://www.facebook.com/enetfiberperu" target="_blank" style="width: 100%;">
-                    <img src="anuncio.jpg" alt="Anuncio Emax" class="ads-vertical-media" onerror="this.src='https://via.placeholder.com/350x500/3d2c04/ffb703?text=PUBLICIDAD';">
-                </a>
-            </div>
-
-            <div class="ads-vertical-container">
-                <h4>Spot Publicitario</h4>
-                <video class="ads-vertical-media" autoplay muted loop playsinline>
-                    <source src="anuncio.mp4" type="video/mp4">
-                    Tu navegador no soporta videos publicitarios.
-                </video>
-            </div>
-        </aside>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 <span>ENTORNO DIGITAL ONLINE S.A.C.</span> (ENET FIBER PERU). Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        // Transición de ciudades cada 2 segundos con nombre sincronizado
-        let currentSlide = 0;
-        const cityItems = document.querySelectorAll('.city-item');
-        const cityNameDisplay = document.getElementById('cityNameDisplay');
-
-        function nextCitySlide() {
-            if (cityItems.length === 0) return;
-            
-            cityItems[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % cityItems.length;
-            cityItems[currentSlide].classList.add('active');
-            
-            let cityName = cityItems[currentSlide].getAttribute('data-name');
-            cityNameDisplay.innerText = cityName;
-        }
-
-        setInterval(nextCitySlide, 2000);
-
-        // Generador de destellos flotantes
-        const sparklesContainer = document.getElementById('sparkles-container');
-        for (let i = 0; i < 35; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
-            
-            const size = Math.random() * 7 + 3;
-            sparkle.style.width = `${size}px`;
-            sparkle.style.height = `${size}px`;
-            sparkle.style.left = `${Math.random() * 100}vw`;
-            
-            const duration = Math.random() * 3 + 2;
-            const delay = Math.random() * 5;
-            sparkle.style.animationDuration = `${duration}s`;
-            sparkle.style.animationDelay = `${delay}s`;
-            sparklesContainer.appendChild(sparkle);
-        }
-
-        var video = document.getElementById('videoPlayer');
-        var hls;
-
-        function cargarStream(url) {
-            if (!url) {
-                alert("Próximamente transmisión en vivo para este canal.");
-                return;
-            }
-            
-            if (hls) {
-                hls.destroy();
-            }
-
-            if (Hls.isSupported()) {
-                hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play().catch(error => console.log("Autoplay bloqueado:", error));
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.addEventListener('loadedmetadata', function() {
-                    video.play().catch(error => console.log("Autoplay bloqueado:", error));
-                });
-            }
-        }
-
-        cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
-
-        function cambiarCanal(urlStream) {
-            var selectElement = document.getElementById('channelSelect');
-            var selectedOption = selectElement.options[selectElement.selectedIndex];
-            var nombreCanal = selectedOption.getAttribute('data-nombre');
-
-            document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${nombreCanal} PARA EL MUNDO`;
-
-            cargarStream(urlStream);
-        }
-
-        function updateClock() {
-            const now = new Date();
-            const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
-            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            
-            const dateStr = now.toLocaleDateString('es-ES', optionsDate);
-            const timeStr = now.toLocaleTimeString('es-ES', optionsTime);
-            
-            document.getElementById('topClock').innerHTML = `${dateStr} | <b>${timeStr}</b>`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        function updateVisitorCounter() {
-            let visits = localStorage.getItem('enet_visits');
-            if (!visits) {
-                visits = 1250;
-            }
-            
-            if (!sessionStorage.getItem('counted_visit')) {
-                visits = parseInt(visits) + 1;
-                localStorage.setItem('enet_visits', visits);
-                sessionStorage.setItem('counted_visit', 'true');
-            }
-            
-            document.getElementById('count').innerText = visits;
-        }
-        updateVisitorCounter();
-    </script>
-</body>
-</html>
+            border: 1px solid rgba(255,
