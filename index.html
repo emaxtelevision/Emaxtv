@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
-    <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Canales en vivo en alta definición.">
+    <title>ENTORNO DIGITAL ONLINE S.A.C. - ENET FIBER PERU | Señal en Vivo HD</title>
+    <meta name="description" content="Sitio oficial operado por ENTORNO DIGITAL ONLINE S.A.C. (ENET FIBER PERU). Canales en vivo en alta definición.">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         :root {
@@ -111,24 +111,30 @@
 
         .brand-container {
             display: flex;
-            align-items: center;
-            gap: 12px;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .logo-container h1 {
-            font-size: 1.25rem;
-            font-weight: bold;
+        /* Título grande arriba: ENTORNO DIGITAL ONLINE S.A.C. */
+        .brand-container h1 {
+            font-size: 1.4rem;
+            font-weight: 900;
             color: var(--text-light);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(255, 183, 3, 0.7);
         }
 
-        .logo-container h1 span {
+        .brand-container h1 span {
             color: var(--accent-yellow);
         }
 
-        .logo-container .location-tag {
-            font-size: 0.7rem;
+        /* Subtítulo abajo: ENET FIBER PERÚ */
+        .brand-container .sub-brand {
+            font-size: 0.95rem;
             color: var(--accent-yellow);
-            font-weight: 600;
+            font-weight: bold;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
@@ -445,16 +451,15 @@
 </head>
 <body>
 
+    <!-- FONDO ANIMADO Y LUCES FLOTANTES -->
     <div class="pro-tv-background"></div>
     <div class="dynamic-waves"></div>
     <div id="sparkles-container"></div>
 
     <header>
         <div class="brand-container">
-            <div class="logo-container">
-                <h1>ENET FIBER <span>PERÚ</span></h1>
-                <span class="location-tag">ENTORNO DIGITAL ONLINE S.A.C.</span>
-            </div>
+            <h1>ENTORNO DIGITAL ONLINE <span>S.A.C.</span></h1>
+            <span class="sub-brand">ENET FIBER PERÚ</span>
         </div>
 
         <div class="channel-selector-bar">
@@ -484,6 +489,7 @@
         </div>
 
         <aside class="right-column">
+            <!-- PORTADA INTERACTIVA CON ENLACE A enet.com.pe -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada">
@@ -493,6 +499,7 @@
                 </div>
             </a>
 
+            <!-- PATROCINADOR -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
@@ -500,6 +507,7 @@
                 </a>
             </div>
 
+            <!-- CUADRO DE COBERTURA NACIONAL CON FOTOS ROTATIVAS -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
@@ -513,4 +521,109 @@
                         <img src="jaen.jpg" class="city-slide" alt="Jaén">
                     </div>
                     <div class="city-item" data-name="Juanjui">
-                        <img src="juanjui.jpg" class="city-slide" alt="
+                        <img src="juanjui.jpg" class="city-slide" alt="Juanjui">
+                    </div>
+                    <div class="city-item" data-name="Naranjillo">
+                        <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo">
+                    </div>
+                    <div class="city-item" data-name="El Porvenir">
+                        <img src="porvenir.jpg" class="city-slide" alt="El Porvenir">
+                    </div>
+                    <div class="city-item" data-name="Rioja">
+                        <img src="rioja.jpg" class="city-slide" alt="Rioja">
+                    </div>
+                    <div class="city-item" data-name="Soritor">
+                        <img src="soritor.jpg" class="city-slide" alt="Soritor">
+                    </div>
+                    <div class="city-item" data-name="Trujillo">
+                        <img src="trujillo.jpg" class="city-slide" alt="Trujillo">
+                    </div>
+
+                    <div class="city-name-tag">
+                        <span id="cityNameDisplay">Bagua</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPOT PUBLICITARIO -->
+            <div class="ads-vertical-container">
+                <h4>Spot Publicitario</h4>
+                <video class="ads-vertical-media" autoplay muted loop playsinline>
+                    <source src="anuncio.mp4" type="video/mp4">
+                    Tu navegador no soporta videos publicitarios.
+                </video>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <span>ENTORNO DIGITAL ONLINE S.A.C.</span></p>
+    </footer>
+
+    <script>
+        // Generador de destellos luminosos flotantes de fondo
+        const sparklesContainer = document.getElementById('sparkles-container');
+        for (let i = 0; i < 40; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add(Math.random() > 0.5 ? 'sparkle-blue' : 'sparkle-white');
+            
+            const size = Math.random() * 7 + 3;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${Math.random() * 100}vw`;
+            
+            const duration = Math.random() * 3 + 2;
+            const delay = Math.random() * 5;
+            sparkle.style.animationDuration = `${duration}s`;
+            sparkle.style.animationDelay = `${delay}s`;
+            sparklesContainer.appendChild(sparkle);
+        }
+
+        // Transición de fotos de ciudades cada 2 segundos
+        let currentSlide = 0;
+        const cityItems = document.querySelectorAll('.city-item');
+        const cityNameDisplay = document.getElementById('cityNameDisplay');
+
+        function nextCitySlide() {
+            if (cityItems.length === 0) return;
+            cityItems[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % cityItems.length;
+            cityItems[currentSlide].classList.add('active');
+            
+            let cityName = cityItems[currentSlide].getAttribute('data-name');
+            cityNameDisplay.innerText = cityName;
+        }
+        setInterval(nextCitySlide, 2000);
+
+        var video = document.getElementById('videoPlayer');
+        var hls;
+        function cargarStream(url) {
+            if (hls) hls.destroy();
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(e => console.log(e)));
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.addEventListener('loadedmetadata', () => video.play().catch(e => console.log(e)));
+            }
+        }
+        cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
+
+        function cambiarCanal(urlStream) {
+            let select = document.getElementById('channelSelect');
+            let name = select.options[select.selectedIndex].getAttribute('data-nombre');
+            document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${name}`;
+            cargarStream(urlStream);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('topClock').innerText = now.toLocaleDateString() + ' | ' + now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
