@@ -30,10 +30,74 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            overflow-x: hidden;
         }
 
+        /* --- FONDO ANIMADO PROFESIONAL CON ONDAS Y LUCES --- */
+        .pro-tv-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: linear-gradient(135deg, #1f1301 0%, #3d2c04 40%, #785202 80%, #1f1301 100%);
+            background-size: 300% 300%;
+            animation: gradientMove 12s ease infinite alternate;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .dynamic-waves {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: -2;
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, rgba(120, 82, 2, 0.4) 40%, rgba(0, 180, 216, 0.15) 70%, transparent 100%);
+            animation: rotateWaves 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateWaves {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* DESTELLOS DINÁMICOS DE LUCES (AZUL Y BLANCO) */
+        .sparkle-blue, .sparkle-white {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatSparkle 4s infinite linear;
+            z-index: -1;
+        }
+
+        .sparkle-blue {
+            background: radial-gradient(circle, #00b4d8 0%, rgba(0, 180, 216, 0) 70%);
+            box-shadow: 0 0 12px #00b4d8;
+        }
+
+        .sparkle-white {
+            background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0) 70%);
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        @keyframes floatSparkle {
+            0% { transform: translateY(105vh) scale(0.2); opacity: 0; }
+            40% { opacity: 1; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
+        }
+        /* -------------------------------------------------- */
+
         header {
-            background: rgba(17, 24, 39, 0.98);
+            background: rgba(17, 24, 39, 0.92);
+            backdrop-filter: blur(16px);
             padding: 0.8rem 1.5rem;
             display: flex;
             justify-content: space-between;
@@ -42,6 +106,7 @@
             gap: 15px;
             border-bottom: 2px solid rgba(255, 183, 3, 0.5);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            z-index: 10;
         }
 
         .brand-container {
@@ -129,6 +194,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 1.5rem;
+            z-index: 1;
         }
 
         @media (max-width: 900px) {
@@ -150,6 +216,7 @@
             overflow: hidden;
             border: 2px solid var(--accent-yellow);
             aspect-ratio: 16/9;
+            box-shadow: 0 15px 35px rgba(255, 183, 3, 0.3);
         }
 
         video {
@@ -161,6 +228,7 @@
 
         .channel-info {
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border-left: 4px solid var(--accent-yellow);
             padding: 1rem 1.2rem;
             border-radius: 0 10px 10px 0;
@@ -169,6 +237,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
         .channel-info h2 {
@@ -187,6 +256,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.5);
         }
 
         .right-column {
@@ -199,6 +269,7 @@
         .cover-banner-box {
             width: 100%;
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
             border: 2px solid var(--accent-yellow);
@@ -248,6 +319,7 @@
         .ads-vertical-container {
             width: 100%;
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(255, 183, 3, 0.4);
@@ -279,9 +351,11 @@
         .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border-radius: 12px;
             overflow: hidden;
             border: 2px solid var(--accent-yellow);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
         }
@@ -330,7 +404,6 @@
             object-fit: cover;
         }
 
-        /* Etiqueta flotante con el nombre de la ciudad */
         .city-name-tag {
             position: absolute;
             bottom: 0;
@@ -356,11 +429,13 @@
 
         footer {
             background-color: rgba(31, 19, 1, 0.95);
+            backdrop-filter: blur(12px);
             text-align: center;
             padding: 1.2rem;
             font-size: 0.85rem;
             color: var(--text-gray);
             border-top: 1px solid rgba(255, 183, 3, 0.3);
+            z-index: 10;
         }
 
         footer span {
@@ -369,6 +444,10 @@
     </style>
 </head>
 <body>
+
+    <div class="pro-tv-background"></div>
+    <div class="dynamic-waves"></div>
+    <div id="sparkles-container"></div>
 
     <header>
         <div class="brand-container">
@@ -405,7 +484,6 @@
         </div>
 
         <aside class="right-column">
-            <!-- PORTADA INTERACTIVA -->
             <a href="https://enet.com.pe/" target="_blank" class="cover-banner-box">
                 <div class="cover-image-container">
                     <img src="portada.jpeg" alt="ENET Fiber Perú Portada">
@@ -415,7 +493,6 @@
                 </div>
             </a>
 
-            <!-- PATROCINADOR -->
             <div class="ads-vertical-container">
                 <h4>Patrocinador Exclusivo</h4>
                 <a href="https://enet.com.pe/" target="_blank" style="width: 100%;">
@@ -423,7 +500,6 @@
                 </a>
             </div>
 
-            <!-- CUADRO DE COBERTURA NACIONAL CON FOTOS ROTATIVAS -->
             <div class="cities-showcase-box">
                 <div class="cities-showcase-header"><h4>Cobertura Nacional</h4></div>
                 <div class="slideshow-container" id="slideshowContainer">
@@ -437,91 +513,4 @@
                         <img src="jaen.jpg" class="city-slide" alt="Jaén">
                     </div>
                     <div class="city-item" data-name="Juanjui">
-                        <img src="juanjui.jpg" class="city-slide" alt="Juanjui">
-                    </div>
-                    <div class="city-item" data-name="Naranjillo">
-                        <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo">
-                    </div>
-                    <div class="city-item" data-name="El Porvenir">
-                        <img src="porvenir.jpg" class="city-slide" alt="El Porvenir">
-                    </div>
-                    <div class="city-item" data-name="Rioja">
-                        <img src="rioja.jpg" class="city-slide" alt="Rioja">
-                    </div>
-                    <div class="city-item" data-name="Soritor">
-                        <img src="soritor.jpg" class="city-slide" alt="Soritor">
-                    </div>
-                    <div class="city-item" data-name="Trujillo">
-                        <img src="trujillo.jpg" class="city-slide" alt="Trujillo">
-                    </div>
-
-                    <div class="city-name-tag">
-                        <span id="cityNameDisplay">Bagua</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SPOT PUBLICITARIO -->
-            <div class="ads-vertical-container">
-                <h4>Spot Publicitario</h4>
-                <video class="ads-vertical-media" autoplay muted loop playsinline>
-                    <source src="anuncio.mp4" type="video/mp4">
-                    Tu navegador no soporta videos publicitarios.
-                </video>
-            </div>
-        </aside>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 <span>ENTORNO DIGITAL ONLINE S.A.C.</span></p>
-    </footer>
-
-    <script>
-        // Transición de fotos de ciudades cada 2 segundos
-        let currentSlide = 0;
-        const cityItems = document.querySelectorAll('.city-item');
-        const cityNameDisplay = document.getElementById('cityNameDisplay');
-
-        function nextCitySlide() {
-            if (cityItems.length === 0) return;
-            cityItems[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % cityItems.length;
-            cityItems[currentSlide].classList.add('active');
-            
-            let cityName = cityItems[currentSlide].getAttribute('data-name');
-            cityNameDisplay.innerText = cityName;
-        }
-        setInterval(nextCitySlide, 2000);
-
-        var video = document.getElementById('videoPlayer');
-        var hls;
-        function cargarStream(url) {
-            if (hls) hls.destroy();
-            if (Hls.isSupported()) {
-                hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(e => console.log(e)));
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.addEventListener('loadedmetadata', () => video.play().catch(e => console.log(e)));
-            }
-        }
-        cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
-
-        function cambiarCanal(urlStream) {
-            let select = document.getElementById('channelSelect');
-            let name = select.options[select.selectedIndex].getAttribute('data-nombre');
-            document.getElementById('channelTitleDisplay').innerText = `SEÑAL EN VIVO - ${name}`;
-            cargarStream(urlStream);
-        }
-
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('topClock').innerText = now.toLocaleDateString() + ' | ' + now.toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
-</body>
-</html>
+                        <img src="juanjui.jpg" class="city-slide" alt="
