@@ -304,7 +304,7 @@
             letter-spacing: 1px;
         }
 
-        /* CANALES INFANTILES EN CÍRCULOS */
+        /* CANALES INFANTILES ANIMADOS CON RESPALDO DE SEGURIDAD */
         .kids-channels-box {
             width: 100%;
             background: var(--card-bg);
@@ -336,37 +336,63 @@
         .kids-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 12px;
             justify-items: center;
         }
 
-        .kid-circle-card {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            background: rgba(31, 19, 1, 0.8);
-            border: 2px solid var(--accent-yellow);
+        .kid-animated-card {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: rgba(31, 19, 1, 0.7);
+            border: 1px solid rgba(255, 183, 3, 0.4);
+            border-radius: 8px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 6px;
-            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: floatCard 3s ease-in-out infinite alternate;
         }
 
-        .kid-circle-card:hover {
-            transform: scale(1.12);
+        .kid-animated-card:nth-child(even) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px) scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+            100% { transform: translateY(-4px) scale(1.03); box-shadow: 0 8px 20px rgba(255, 183, 3, 0.3); }
+        }
+
+        .kid-animated-card:hover {
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
+            background: rgba(17, 24, 39, 0.95);
+            box-shadow: 0 0 18px rgba(0, 180, 216, 0.7);
+            transform: scale(1.08) translateY(-5px);
         }
 
-        .kid-circle-card img {
+        .kid-animated-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
+            object-fit: contain;
             display: block;
+            border-radius: 4px;
+        }
+
+        .kid-fallback-text {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            background: #111827;
+            color: var(--accent-yellow);
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px;
         }
 
         /* CUADRO DE CIUDADES CON FOTOS EN TRANSICIÓN */
@@ -521,18 +547,36 @@
                 </div>
             </a>
 
-            <!-- CANALES INFANTILES EN CÍRCULOS -->
+            <!-- CANALES INFANTILES ANIMADOS -->
             <div class="kids-channels-box">
                 <div class="kids-channels-header">
                     <h4>CANALES INFANTILES RECOMENDADOS POR ENET FIBER PERU</h4>
                 </div>
                 <div class="kids-grid">
-                    <div class="kid-circle-card"><img src="bitme.jpg" alt="Bitme" onerror="this.style.display='none';"></div>
-                    <div class="kid-circle-card"><img src="Cartoonito.jpg" alt="Cartoonito" onerror="this.style.display='none';"></div>
-                    <div class="kid-circle-card"><img src="cartoonnetwor.jpg" alt="Cartoon Network" onerror="this.style.display='none';"></div>
-                    <div class="kid-circle-card"><img src="clan.jpg" alt="Clan" onerror="this.style.display='none';"></div>
-                    <div class="kid-circle-card"><img src="Discovery_kids_logo.jpg" alt="Discovery Kids" onerror="this.style.display='none';"></div>
-                    <div class="kid-circle-card"><img src="dreamworks.jpg" alt="Dreamworks" onerror="this.style.display='none';"></div>
+                    <div class="kid-animated-card">
+                        <img src="bitme.jpg" alt="Bitme" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">BITME</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="Cartoonito.jpg" alt="Cartoonito" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">CARTOONITO</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="cartoonnetwork.jpg" alt="Cartoon Network" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">CARTOON NETWORK</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="clan.jpg" alt="Clan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">CLAN</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="Discovery_kids_logo.jpg" alt="Discovery Kids" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">DISCOVERY KIDS</div>
+                    </div>
+                    <div class="kid-animated-card">
+                        <img src="dreamworks.jpg" alt="Dreamworks" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="kid-fallback-text">DREAMWORKS</div>
+                    </div>
                 </div>
             </div>
 
