@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO para aparecer en Google -->
     <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
     <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emusic, Cumbianet, Edx, Emax Tv y canales en vivo en alta definición.">
     <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emusic, Cumbianet, Edx, Emax Tv, Selva TV, En Vivo">
     <meta name="author" content="Entorno Digital Online S.A.C.">
     
-    <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
     <style>
@@ -232,7 +230,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Contenido Principal en Grid (Reproductor + Cuadro de Ciudades) */
         main {
             flex: 1;
             max-width: 1300px;
@@ -317,7 +314,7 @@
             box-shadow: 0 6px 20px rgba(24, 119, 242, 0.7);
         }
 
-        /* CUADRO DE CIUDADES EN LA PARTE INDICADA (Estilo Tarjeta con Transición de 2s) */
+        /* CUADRO DE CIUDADES CON RESPALDO AUTOMÁTICO */
         .cities-showcase-box {
             width: 100%;
             background: var(--card-bg);
@@ -350,8 +347,11 @@
             width: 100%;
             aspect-ratio: 9/16;
             max-height: 420px;
-            background: #000;
+            background: #1f1301;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .city-slide {
@@ -369,7 +369,31 @@
             opacity: 1;
         }
 
-        /* Etiqueta flotante con el nombre de cada ciudad en la parte inferior */
+        /* Estilo si la foto no carga o no existe */
+        .slide-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2c1d02, #111827);
+            color: var(--accent-yellow);
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .slide-fallback.active {
+            opacity: 1;
+        }
+
         .city-name-tag {
             position: absolute;
             bottom: 0;
@@ -378,6 +402,7 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
             padding: 20px 10px 10px 10px;
             text-align: center;
+            z-index: 5;
         }
 
         .city-name-tag span {
@@ -387,7 +412,7 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-shadow: 0 2px 6px rgba(0,0,0,0.9);
-            background: rgba(17, 24, 39, 0.7);
+            background: rgba(17, 24, 39, 0.85);
             padding: 4px 12px;
             border-radius: 20px;
             border: 1px solid rgba(255, 183, 3, 0.5);
@@ -417,7 +442,7 @@
 
     <header>
         <div class="brand-container">
-            <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo">
+            <img src="logo.jpg" alt="ENET FIBER PERU Logo" class="channel-logo" onerror="this.style.display='none';">
             <div class="logo-container">
                 <h1>ENET FIBER <span>PERÚ</span></h1>
                 <span class="location-tag" id="currentLocationTag">ENTORNO DIGITAL ONLINE S.A.C.</span>
@@ -447,7 +472,6 @@
     </header>
 
     <main>
-        <!-- Columna Izquierda: Reproductor -->
         <div class="left-column">
             <div class="player-wrapper">
                 <video id="videoPlayer" controls autoplay muted playsinline></video>
@@ -463,23 +487,49 @@
             </div>
         </div>
 
-        <!-- Columna Derecha: Cuadro con la transición automática de fotos de ciudades y sus nombres -->
         <aside class="cities-showcase-box">
             <div class="cities-showcase-header">
                 <h4>Cobertura Nacional - ENET Fiber</h4>
             </div>
             <div class="slideshow-container" id="slideshowContainer">
-                <!-- Las imágenes rotarán cada 2 segundos con su respectivo nombre abajo -->
-                <img src="bagua.jpg" class="city-slide active" data-name="Bagua" alt="Bagua" onerror="this.style.display='none';">
-                <img src="bellavista.jpg" class="city-slide" data-name="Bellavista" alt="Bellavista" onerror="this.style.display='none';">
-                <img src="jaen.jpg" class="city-slide" data-name="Jaen" alt="Jaen" onerror="this.style.display='none';">
-                <img src="juanjui.jpg" class="city-slide" data-name="Juanjui" alt="Juanjui" onerror="this.style.display='none';">
-                <img src="naranjillo.jpg" class="city-slide" data-name="Naranjillo" alt="Naranjillo" onerror="this.style.display='none';">
-                <img src="porvenir.jpg" class="city-slide" data-name="Porvenir" alt="Porvenir" onerror="this.style.display='none';">
-                <img src="rioja.jpg" class="city-slide" data-name="Rioja" alt="Rioja" onerror="this.style.display='none';">
-                <img src="soritor.jpg" class="city-slide" data-name="Soritor" alt="Soritor" onerror="this.style.display='none';">
-                <img src="trujillo.jpg" class="city-slide" data-name="Trujillo" alt="Trujillo" onerror="this.style.display='none';">
                 
+                <div class="city-item active" data-name="Bagua">
+                    <img src="bagua.jpg" class="city-slide active" alt="Bagua" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>BAGUA</div>
+                </div>
+                <div class="city-item" data-name="Bellavista">
+                    <img src="bellavista.jpg" class="city-slide" alt="Bellavista" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>BELLAVISTA</div>
+                </div>
+                <div class="city-item" data-name="Jaen">
+                    <img src="jaen.jpg" class="city-slide" alt="Jaen" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>JAÉN</div>
+                </div>
+                <div class="city-item" data-name="Juanjui">
+                    <img src="juanjui.jpg" class="city-slide" alt="Juanjui" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>JUANJUI</div>
+                </div>
+                <div class="city-item" data-name="Naranjillo">
+                    <img src="naranjillo.jpg" class="city-slide" alt="Naranjillo" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>NARANJILLO</div>
+                </div>
+                <div class="city-item" data-name="Porvenir">
+                    <img src="porvenir.jpg" class="city-slide" alt="Porvenir" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>EL PORVENIR</div>
+                </div>
+                <div class="city-item" data-name="Rioja">
+                    <img src="rioja.jpg" class="city-slide" alt="Rioja" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>RIOJA</div>
+                </div>
+                <div class="city-item" data-name="Soritor">
+                    <img src="soritor.jpg" class="city-slide" alt="Soritor" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>SORITOR</div>
+                </div>
+                <div class="city-item" data-name="Trujillo">
+                    <img src="trujillo.jpg" class="city-slide" alt="Trujillo" onerror="this.style.display='none'; this.nextElementSibling.classList.add('active');">
+                    <div class="slide-fallback">🏙️ <br>TRUJILLO</div>
+                </div>
+
                 <div class="city-name-tag">
                     <span id="cityNameDisplay">Bagua</span>
                 </div>
@@ -492,29 +542,35 @@
     </footer>
 
     <script>
-        // Transición automática de fotos de ciudades cada 2 segundos con actualización de nombre
+        // Transición automática de fotos de ciudades cada 2 segundos con respaldo
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.city-slide');
+        const cityItems = document.querySelectorAll('.city-item');
         const cityNameDisplay = document.getElementById('cityNameDisplay');
 
         function nextCitySlide() {
-            if (slides.length === 0) return;
+            if (cityItems.length === 0) return;
             
-            // Ocultar slide actual
-            slides[currentSlide].classList.remove('active');
+            cityItems[currentSlide].classList.remove('active');
+            let oldImg = cityItems[currentSlide].querySelector('.city-slide');
+            let oldFall = cityItems[currentSlide].querySelector('.slide-fallback');
+            if(oldImg) oldImg.classList.remove('active');
+            if(oldFall) oldFall.classList.remove('active');
             
-            // Avanzar al siguiente index
-            currentSlide = (currentSlide + 1) % slides.length;
+            currentSlide = (currentSlide + 1) % cityItems.length;
             
-            // Mostrar nuevo slide
-            slides[currentSlide].classList.add('active');
+            cityItems[currentSlide].classList.add('active');
+            let newImg = cityItems[currentSlide].querySelector('.city-slide');
+            let newFall = cityItems[currentSlide].querySelector('.slide-fallback');
+            if(newImg && newImg.naturalWidth > 0) {
+                newImg.classList.add('active');
+            } else if(newFall) {
+                newFall.classList.add('active');
+            }
             
-            // Actualizar nombre de la ciudad en la parte inferior
-            let cityName = slides[currentSlide].getAttribute('data-name');
+            let cityName = cityItems[currentSlide].getAttribute('data-name');
             cityNameDisplay.innerText = cityName;
         }
 
-        // Intervalo exacto de 2000 ms (2 segundos)
         setInterval(nextCitySlide, 2000);
 
         // Generador de destellos flotantes
@@ -563,7 +619,6 @@
             }
         }
 
-        // Canal por defecto (Emax Tv)
         cargarStream('https://vs20.live.opencaster.com/emaxtelevision_2a1a1467/index.m3u8');
 
         function cambiarCanal(urlStream) {
