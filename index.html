@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO para aparecer en Google -->
     <title>ENET FIBER PERU - ENTORNO DIGITAL ONLINE S.A.C. | Señal en Vivo HD</title>
     <meta name="description" content="Sitio oficial de ENET FIBER PERU, operado por ENTORNO DIGITAL ONLINE S.A.C. Disfruta de Emusic, Cumbianet, Edx, Emax Tv y canales en vivo en alta definición.">
     <meta name="keywords" content="ENET Fiber Peru, Entorno Digital Online S.A.C., Emusic, Cumbianet, Edx, Emax Tv, Selva TV, En Vivo">
     <meta name="author" content="Entorno Digital Online S.A.C.">
     
-    <!-- Librería Hls.js para reproducir transmisiones HLS (.m3u8) -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
     <style>
@@ -112,7 +110,7 @@
             z-index: 10;
         }
 
-        /* Contenedor del Banner con Transición de Fotos */
+        /* Contenedor del Banner con Transición de Fotos a 2 Segundos */
         .trujillo-banner-top {
             width: 100%;
             height: 110px;
@@ -134,7 +132,7 @@
             object-position: center;
             display: block;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 0.6s ease-in-out;
             filter: brightness(0.45);
         }
 
@@ -513,10 +511,8 @@
     <div id="sparkles-container"></div>
 
     <header>
-        <!-- Franja Superior con Transición Automática (Slider) de las Ciudades -->
         <div class="trujillo-banner-top" id="sliderContainer">
             <div class="trujillo-banner-overlay"></div>
-            <!-- Imágenes en formato JPG para la transición -->
             <img src="bagua.jpg" class="banner-slide active" alt="Bagua" onerror="this.style.display='none';">
             <img src="bellavista.jpg" class="banner-slide" alt="Bellavista" onerror="this.style.display='none';">
             <img src="jaen.jpg" class="banner-slide" alt="Jaen" onerror="this.style.display='none';">
@@ -620,7 +616,7 @@
     </footer>
 
     <script>
-        // Transición automática (Slider) de las fotos de ciudades en formato JPG
+        // Transición automática (Slider) configurada exactamente a 2 segundos por foto en loop
         let currentSlide = 0;
         const slides = document.querySelectorAll('.banner-slide');
         
@@ -631,8 +627,8 @@
             slides[currentSlide].classList.add('active');
         }
         
-        // Cambia de foto cada 4 segundos
-        setInterval(nextSlide, 4000);
+        // 2000 milisegundos = 2 segundos exactos
+        setInterval(nextSlide, 2000);
 
         // Generador de destellos flotantes
         const sparklesContainer = document.getElementById('sparkles-container');
